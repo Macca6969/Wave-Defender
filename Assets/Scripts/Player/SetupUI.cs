@@ -18,7 +18,7 @@ public GameObject ammoTextUI;
 public GameObject playerUI;
 
 [Header("Scripts")]
-public Pistol pistol;
+//public Pistol pistol;
 public Player player;
 
 
@@ -34,7 +34,7 @@ public void SetupPlayerUI()
     yield return new WaitForSeconds(0.0f);
     healthTextUI.GetComponent<TMP_Text>().text = player.playerCurrentHealth + "/" + player.playerMaxHealth;
     healthBarImage.fillAmount = (player.playerCurrentHealth + 0.0f) / (player.playerMaxHealth + 0.0f);
-    pistol.ammoTextUI.GetComponent<TMP_Text>().text =  pistol.pistolCurrentClip + "/" + pistol.pistolCurrentAmmo;
+    //pistol.ammoTextUI.GetComponent<TMP_Text>().text =  pistol.pistolCurrentClip + "/" + pistol.pistolCurrentAmmo;
     }
 }
 

@@ -7,7 +7,7 @@ public class InputController : MonoBehaviour
 {
     [SerializeField] public bool InvertMouseY = false;
 
-    [SerializeField] private PlayerInput playerControls;
+    [SerializeField] private PlayerInput playerInput;
     [SerializeField] private PlayerController playerController;
 
 
@@ -18,40 +18,40 @@ public class InputController : MonoBehaviour
 
     private void Awake()
     {
-        playerControls = new PlayerInput();
+        playerInput = new PlayerInput();
         playerController = GetComponent<PlayerController>();
    
     }
 
     private void Update()
     {
-        lookInput = playerControls.OnFoot.Look.ReadValue<Vector2>();
-        movementInput = playerControls.OnFoot.Movement.ReadValue<Vector2>();
+        lookInput = playerInput.OnFoot.Look.ReadValue<Vector2>();
+        movementInput = playerInput.OnFoot.Movement.ReadValue<Vector2>();
     }
 
 
     
     private void OnEnable()
     {
-        playerControls.Enable();
+        playerInput.Enable();
 
  
 
-        playerControls.OnFoot.Sprint.started += context => playerController.HandleSprinting(context);
+        playerInput.OnFoot.Sprint.started += context => playerController.HandleSprinting(context);
 
-        playerControls.OnFoot.Sprint.canceled += context => playerController.ResetMovementSpeed(context);
+        playerInput.OnFoot.Sprint.canceled += context => playerController.ResetMovementSpeed(context);
 
-        playerControls.OnFoot.Jump.started += context => playerController.HandleJump(context);
+        playerInput.OnFoot.Jump.started += context => playerController.HandleJump(context);
 
-        playerControls.OnFoot.Crouch.started += context => playerController.HandleCrouch(context);
+        playerInput.OnFoot.Crouch.started += context => playerController.HandleCrouch(context);
 
-        playerControls.OnFoot.Crouch.canceled += context => playerController.ResetMovementSpeed(context);
+        playerInput.OnFoot.Crouch.canceled += context => playerController.ResetMovementSpeed(context);
 
-        playerControls.OnFoot.Crouch.canceled += context => playerController.ResetPlayerHeight(context);
+        playerInput.OnFoot.Crouch.canceled += context => playerController.ResetPlayerHeight(context);
 
-        playerControls.OnFoot.Fire.started += context => playerController.PlayerFire(context);
+        playerInput.OnFoot.Fire.started += context => playerController.PlayerFire(context);
 
-        playerControls.OnFoot.Reload.started += context => playerController.PlayerReload(context);
+        playerInput.OnFoot.Reload.started += context => playerController.PlayerReload(context);
 
     
     }
@@ -59,32 +59,25 @@ public class InputController : MonoBehaviour
 
     private void OnDisable()
     {
-        playerControls.Disable();
+        playerInput.Disable();
 
     
 
-        playerControls.OnFoot.Sprint.started -= context => playerController.HandleSprinting(context);
+        playerInput.OnFoot.Sprint.started -= context => playerController.HandleSprinting(context);
 
-        playerControls.OnFoot.Sprint.canceled -= context => playerController.ResetMovementSpeed(context);
+        playerInput.OnFoot.Sprint.canceled -= context => playerController.ResetMovementSpeed(context);
 
-        playerControls.OnFoot.Jump.started -= context => playerController.HandleJump(context);
+        playerInput.OnFoot.Jump.started -= context => playerController.HandleJump(context);
 
-        playerControls.OnFoot.Crouch.started -= context => playerController.HandleCrouch(context);
+        playerInput.OnFoot.Crouch.started -= context => playerController.HandleCrouch(context);
 
-        playerControls.OnFoot.Crouch.canceled -= context => playerController.ResetMovementSpeed(context);
+        playerInput.OnFoot.Crouch.canceled -= context => playerController.ResetMovementSpeed(context);
 
-        playerControls.OnFoot.Crouch.canceled -= context => playerController.ResetPlayerHeight(context);
+        playerInput.OnFoot.Crouch.canceled -= context => playerController.ResetPlayerHeight(context);
 
-        playerControls.OnFoot.Fire.started -= context => playerController.PlayerFire(context);
+        playerInput.OnFoot.Fire.started -= context => playerController.PlayerFire(context);
 
-        playerControls.OnFoot.Reload.started -= context => playerController.PlayerReload(context);
+        playerInput.OnFoot.Reload.started -= context => playerController.PlayerReload(context);
 
-       
-
-      
-
-       
-
- 
     }
 }

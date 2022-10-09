@@ -53,17 +53,6 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private float jumpHeight = default;
     [SerializeField] public bool isJumping;
 
-   [Header("PlayerHealth")]
-    public GameObject healthTextUI;
-
-    //public Player player;
-
-
-   //[Header("Scripts")]
-   //[SerializeField] public Pistol pistol;
-
-   
-    
 
     void Awake()
     {

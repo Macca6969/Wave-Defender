@@ -8,30 +8,25 @@ using TMPro;
 public class Player : NetworkBehaviour
 {
 
-   #region Variables
-
 
   [Header("Objects")]
   [SerializeField] public GameObject playerUI;
   [SerializeField] private GameObject rightHand;
   [SerializeField] private Camera cam;
   [SerializeField] private CharacterController characterController;
-  [SerializeField] GameObject[] disableGameObjectsOnDeath;
   [SerializeField] private MeshRenderer meshRen;
   [SerializeField] private GameObject meshRenWeapon;
-
-  [Header("Scripts")]
-  [SerializeField] private Pistol pistol;
-  [SerializeField] private AudioScript audioScript;
-  [SerializeField] private PlayerController playerController;
-  [SerializeField] private SetupUI setupUI;
-
-
 
   [Header("UI")]
   [SerializeField] Image healthBarImage;
   [SerializeField] private GameObject healthTextUI;
   [SerializeField] private GameObject levelTextUI;
+
+  [Header("Scripts")]
+  //[SerializeField] private Pistol pistol;
+  [SerializeField] private AudioScript audioScript;
+  [SerializeField] private PlayerController playerController;
+  //[SerializeField] private SetupUI setupUI;
 
   [Header("Other")]
   [SerializeField] private bool [] wasEnabled;
@@ -50,15 +45,6 @@ public class Player : NetworkBehaviour
     get { return _isDead; }
     protected set { _isDead = value; }
   }
-
-
-
-  #endregion
-
-public void Update()
-{
-  levelTextUI.GetComponent<TMP_Text>().text = "Lvl - " + playerLevel;
-}
 
 
   #region Player Setup
@@ -108,7 +94,7 @@ public void SetDefaults ()
     healthTextUI.GetComponent<TMP_Text>().text = playerCurrentHealth + "/" + playerMaxHealth;
     levelTextUI.GetComponent<TMP_Text>().text = "Lvl - " + playerLevel;
     healthBarImage.fillAmount = (playerCurrentHealth + 0.0f) / (playerMaxHealth + 0.0f);
-    pistol.ammoTextUI.GetComponent<TMP_Text>().text =  pistol.pistolCurrentClip + "/" + pistol.pistolCurrentAmmo;
+   // pistol.ammoTextUI.GetComponent<TMP_Text>().text =  pistol.pistolCurrentClip + "/" + pistol.pistolCurrentAmmo;
 
    //Enable the collider
    Collider _col = GetComponent<Collider>();
@@ -144,7 +130,7 @@ public void RpcTakeDamage (int _amount)
       return;
     
     playerCurrentHealth -= _amount;
-    setupUI.UpdateHealthUI();
+    //setupUI.UpdateHealthUI();
     Debug.Log(transform.name + "now has " + playerCurrentHealth + "health.");
     audioScript.playerHitSound.Play();
 
@@ -211,15 +197,3 @@ private void Die()
 #endregion
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
