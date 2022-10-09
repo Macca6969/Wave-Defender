@@ -9,7 +9,6 @@ public class InputController : MonoBehaviour
 
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private PlayerController playerController;
-    [SerializeField] private WeaponSwitching weaponSwitching;
 
 
     [SerializeField] public Vector2 lookInput;
@@ -29,20 +28,6 @@ public class InputController : MonoBehaviour
     {
         lookInput = playerInput.OnFoot.Look.ReadValue<Vector2>();
         movementInput = playerInput.OnFoot.Movement.ReadValue<Vector2>();
-
-          if (mouseScrollY > 0)
-        {
-            Debug.Log("We scrolled up." + mouseScrollY);
-            weaponSwitching.CheckForSwitch(mouseScrollY);
-            mouseScrollY = 0f;
-        }
-        if (mouseScrollY < 0)
-        {
-            Debug.Log("We scrolled down." + mouseScrollY);
-            weaponSwitching.CheckForSwitch(mouseScrollY);
-            mouseScrollY = 0f;
-        }
-
 
     }
 
@@ -71,11 +56,9 @@ public class InputController : MonoBehaviour
         playerInput.OnFoot.Reload.started += context => playerController.PlayerReload(context);
 
         playerInput.OnFoot.ChangeWeapon.started += context => mouseScrollY = context.ReadValue<float>();
-        
+        playerInput.OnFoot.ChangeWeapon.performed += context => playerController.ChangeWeapon(mouseScrollY);
 
-    
     }
-
 
     private void OnDisable()
     {
@@ -100,6 +83,7 @@ public class InputController : MonoBehaviour
         playerInput.OnFoot.Reload.started -= context => playerController.PlayerReload(context);
 
         playerInput.OnFoot.ChangeWeapon.started -= context => mouseScrollY = context.ReadValue<float>();
+        playerInput.OnFoot.ChangeWeapon.performed -= context => playerController.ChangeWeapon(mouseScrollY);
 
     }
 

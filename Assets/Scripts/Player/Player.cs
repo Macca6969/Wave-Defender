@@ -15,7 +15,6 @@ public class Player : NetworkBehaviour
   [SerializeField] private Camera cam;
   [SerializeField] private CharacterController characterController;
   [SerializeField] private MeshRenderer meshRen;
-  [SerializeField] private GameObject meshRenWeapon;
 
   [Header("UI")]
   [SerializeField] Image healthBarImage;
@@ -45,6 +44,8 @@ public class Player : NetworkBehaviour
     get { return _isDead; }
     protected set { _isDead = value; }
   }
+
+  [SyncVar] public int selectedWeapon = 0;
 
 
   #region Player Setup
@@ -92,7 +93,7 @@ public void SetDefaults ()
     Cursor.lockState = CursorLockMode.Locked;
     playerCurrentHealth = playerMaxHealth;
     healthTextUI.GetComponent<TMP_Text>().text = playerCurrentHealth + "/" + playerMaxHealth;
-    levelTextUI.GetComponent<TMP_Text>().text = "Lvl - " + playerLevel;
+    //levelTextUI.GetComponent<TMP_Text>().text = "Lvl - " + playerLevel;
     healthBarImage.fillAmount = (playerCurrentHealth + 0.0f) / (playerMaxHealth + 0.0f);
    // pistol.ammoTextUI.GetComponent<TMP_Text>().text =  pistol.pistolCurrentClip + "/" + pistol.pistolCurrentAmmo;
 
@@ -108,7 +109,6 @@ public void SetDefaults ()
 
 
     meshRen.enabled = true;
-    meshRenWeapon.SetActive(true);
 
     
 
@@ -162,7 +162,6 @@ private void Die()
        Debug.Log("Character controller disabled.");
     }
     meshRen.enabled = false;
-    meshRenWeapon.SetActive(false);
     }
     
     

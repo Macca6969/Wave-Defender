@@ -15,6 +15,7 @@ public class PlayerController : NetworkBehaviour
     [Header("Misc")]
     public static PlayerController instance;
     private CharacterController controller;
+    public Player player;
    
 
     [Header("Movement")]
@@ -53,6 +54,16 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private float jumpHeight = default;
     [SerializeField] public bool isJumping;
 
+    [Header("Weapon Changing")]
+    private int selectedWeaponLocal = 1;
+    public GameObject[] weaponArray;
+
+
+    [SyncVar(hook = nameof(OnWeaponChanged))]
+    public int activeWeaponSynced = 1;
+
+
+
 
     void Awake()
     {
@@ -61,6 +72,10 @@ public class PlayerController : NetworkBehaviour
 
         input = GetComponent<InputController>();
         controller = GetComponent<CharacterController>();
+
+        foreach (var item in weaponArray)
+        if (item != null)
+            item.SetActive(false); 
     
 
     }
@@ -188,6 +203,7 @@ public class PlayerController : NetworkBehaviour
     public void PlayerFire(InputAction.CallbackContext context)
     {
         //pistol.PistolFire();
+        Debug.Log("Firing Pistol");
     }
     
     public void PlayerReload(InputAction.CallbackContext context)
@@ -196,10 +212,56 @@ public class PlayerController : NetworkBehaviour
         Debug.Log("reload 1");
     }
 
-    public void ChangeWeapon(InputAction.CallbackContext context)
+    public void ChangeWeapon(float mouseScrollY)
     {
-        Debug.Log("scrolling.");
+        if (mouseScrollY > 0f)
+        {
+            Debug.Log("ChangeWeapon up.");
+            selectedWeaponLocal += 1;
+            if (selectedWeaponLocal > weaponArray.Length)
+             {
+                selectedWeaponLocal = 1;
+                CmdChangeActiveWeapon(selectedWeaponLocal);
+                
+             }
+        }
+         if (mouseScrollY < 0f)
+        {
+            Debug.Log("ChangeWeapon down.");
+            selectedWeaponLocal -= 1;
+            if (selectedWeaponLocal > weaponArray.Length)
+             {
+                selectedWeaponLocal = 1;
+                CmdChangeActiveWeapon(selectedWeaponLocal);
+                
+             }
+        }
+    
     }
+        
+
+    void OnWeaponChanged(int _Old, int _New)
+{
+    // disable old weapon
+    // in range and not null
+    Debug.Log(" OnWeaponChanged.");
+    if (0 < _Old && _Old < weaponArray.Length && weaponArray[_Old] != null)
+        weaponArray[_Old].SetActive(false);
+    
+    // enable new weapon
+    // in range and not null
+    if (0 < _New && _New < weaponArray.Length && weaponArray[_New] != null)
+        weaponArray[_New].SetActive(true);
+}
+
+[Command]
+ public void CmdChangeActiveWeapon(int newIndex)
+{
+    activeWeaponSynced = newIndex;
+    Debug.Log("CmdChangeWeapon " + newIndex);
+}
+
 
 }
+
     

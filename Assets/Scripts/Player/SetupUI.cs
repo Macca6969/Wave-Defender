@@ -32,6 +32,8 @@ public void SetupPlayerUI()
     {
     
     yield return new WaitForSeconds(0.0f);
+
+    playerUI.gameObject.SetActive(true);
     healthTextUI.GetComponent<TMP_Text>().text = player.playerCurrentHealth + "/" + player.playerMaxHealth;
     healthBarImage.fillAmount = (player.playerCurrentHealth + 0.0f) / (player.playerMaxHealth + 0.0f);
     //pistol.ammoTextUI.GetComponent<TMP_Text>().text =  pistol.pistolCurrentClip + "/" + pistol.pistolCurrentAmmo;
