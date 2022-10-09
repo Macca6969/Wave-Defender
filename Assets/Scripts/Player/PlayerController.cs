@@ -196,5 +196,10 @@ public class PlayerController : NetworkBehaviour
         Debug.Log("reload 1");
     }
 
+    public void ChangeWeapon(InputAction.CallbackContext context)
+    {
+        Debug.Log("scrolling.");
+    }
+
 }
     
