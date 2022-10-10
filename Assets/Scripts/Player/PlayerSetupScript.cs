@@ -16,6 +16,7 @@ public PlayerInput playerInput;
 public PlayerController playerController;
 public PlayerLook playerLook;
 public Camera cam;
+public Camera wepCam;
 public GameObject playerUI;
 public Player playerScript;
 public SetupUI setupUI;
@@ -52,6 +53,7 @@ public override void OnStartLocalPlayer()
   playerLook.enabled = true;
   weaponSwitching.enabled = true;
   cam.gameObject.SetActive(true);
+  wepCam.gameObject.SetActive(true);
   playerUI.gameObject.SetActive(true);
   setupUI.SetupPlayerUI();
 

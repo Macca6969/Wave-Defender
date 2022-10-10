@@ -63,14 +63,6 @@ public class PlayerController : NetworkBehaviour
     public GameObject weaponPistol;
     public GameObject weaponRifle;
     public GameObject weaponHeavy;
-    public Camera pistolCamera;
-    public Camera rifleCamera;
-    public Camera heavyCamera;
-
-    
-
-
-
 
     void Awake()
     {
@@ -235,12 +227,6 @@ public class PlayerController : NetworkBehaviour
                   weaponRifle.SetActive(false);
                   weaponHeavy.SetActive(true); 
               }
-              if (!isLocalPlayer)
-                 {
-                    pistolCamera.enabled = false;
-                    rifleCamera.enabled = false;
-                    heavyCamera.enabled = false;
-                 }
     } 
     
 }
