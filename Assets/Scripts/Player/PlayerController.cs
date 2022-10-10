@@ -54,26 +54,29 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private float jumpHeight = default;
     [SerializeField] public bool isJumping;
 
+
+
     [Header("Weapon Changing")]
     [SyncVar(hook = nameof(SelectWeapon))]
     public int selectedWeapon = 0;
     public WeaponSwitching weaponSwitching;
-    public GameObject weapon1;
-    public GameObject weapon2;
-    public GameObject weapon3;
+    public GameObject weaponPistol;
+    public GameObject weaponRifle;
+    public GameObject weaponHeavy;
+    public Camera pistolCamera;
+    public Camera rifleCamera;
+    public Camera heavyCamera;
+
+    
 
 
 
 
     void Awake()
     {
-
         instance = this;
-
         input = GetComponent<InputController>();
         controller = GetComponent<CharacterController>();
-
-
     }
 
 
@@ -119,8 +122,6 @@ public class PlayerController : NetworkBehaviour
         {
             isGrounded = Physics.Raycast(transform.position, Vector3.down, distToGround + 0.1f);
         }
-        
-
     }
 
 
@@ -134,9 +135,6 @@ public class PlayerController : NetworkBehaviour
         playerVelocity.y += gravity * Time.deltaTime;
     }
     
-
-
-
     public void ResetMovementSpeed(InputAction.CallbackContext context)
     {
         movementSpeed = walkSpeed;
@@ -181,7 +179,6 @@ public class PlayerController : NetworkBehaviour
         controller.height = standingHeight;
     }
 
-
     public void HandleFalling()
     {
         currentFallSpeed = playerVelocity.y;
@@ -208,6 +205,7 @@ public class PlayerController : NetworkBehaviour
         Debug.Log("reload 1");
     }
   
+  
     [Command(requiresAuthority = false)] 
     public void CmdSelectedWeapon(int selectedWeapon2)
     {
@@ -216,29 +214,35 @@ public class PlayerController : NetworkBehaviour
 
    public void SelectWeapon(int weaponOld, int weaponNew)
     {
+              
               if (selectedWeapon == 0)
               {
-                  weapon1.SetActive(true);
-                  weapon2.SetActive(false);
-                  weapon3.SetActive(false);
+                  weaponPistol.SetActive(true);
+                  weaponRifle.SetActive(false);
+                  weaponHeavy.SetActive(false);
               }
 
               if (selectedWeapon == 1)
               {
-                  weapon1.SetActive(false);
-                  weapon2.SetActive(true);
-                  weapon3.SetActive(false);
+                  weaponPistol.SetActive(false);
+                  weaponRifle.SetActive(true);
+                  weaponHeavy.SetActive(false);
               }
 
               if (selectedWeapon == 2)
               {
-                  weapon1.SetActive(false);
-                  weapon2.SetActive(false);
-                  weapon3.SetActive(true);   
+                  weaponPistol.SetActive(false);
+                  weaponRifle.SetActive(false);
+                  weaponHeavy.SetActive(true); 
               }
-    }
-
-
+              if (!isLocalPlayer)
+                 {
+                    pistolCamera.enabled = false;
+                    rifleCamera.enabled = false;
+                    heavyCamera.enabled = false;
+                 }
+    } 
+    
 }
 
     

@@ -64,7 +64,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2147483647
+    m_Bits: 55
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -100,7 +100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &981537963767105598
 Transform:
   m_ObjectHideFlags: 0
@@ -175,7 +175,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1631205124465036957
 Transform:
   m_ObjectHideFlags: 0
@@ -313,7 +313,6 @@ GameObject:
   - component: {fileID: 2633701579526999572}
   - component: {fileID: 2633701579526999575}
   - component: {fileID: 2633701579526999573}
-  - component: {fileID: 2633701579526999570}
   - component: {fileID: 7886646045897315865}
   - component: {fileID: -1298223152954745529}
   - component: {fileID: 7047926596579020217}
@@ -322,12 +321,14 @@ GameObject:
   - component: {fileID: 4185513308988491658}
   - component: {fileID: 5062523710966536456}
   - component: {fileID: 5562835205758388776}
+  - component: {fileID: 8467743228634223416}
   - component: {fileID: 7091987648852339861}
-  - component: {fileID: 7812761712239776986}
-  - component: {fileID: 723975116661219681}
+  - component: {fileID: 4396730374653105465}
+  - component: {fileID: 971348257622270491}
+  - component: {fileID: 2413363376846680149}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -411,10 +412,10 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 1
 --- !u!143 &2633701579526999575
 CharacterController:
@@ -451,43 +452,6 @@ MonoBehaviour:
   visible: 0
   m_AssetId: 92e2557f8d8dc754a965e3e513bf941c
   hasSpawned: 0
---- !u!114 &2633701579526999570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2633701579526999568}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  clientAuthority: 1
-  sendRate: 120
-  bufferTimeMultiplier: 2
-  bufferSizeLimit: 64
-  catchupNegativeThreshold: -1
-  catchupPositiveThreshold: 1
-  catchupSpeed: 0.009999999776482582
-  slowdownSpeed: 0.009999999776482582
-  driftEmaDuration: 1
-  dynamicAdjustment: 1
-  dynamicAdjustmentTolerance: 1
-  deliveryTimeEmaDuration: 2
-  onlySyncOnChange: 1
-  bufferResetMultiplier: 5
-  positionSensitivity: 0.01
-  rotationSensitivity: 0.01
-  scaleSensitivity: 0.01
-  syncPosition: 1
-  syncRotation: 1
-  syncScale: 0
-  showGizmos: 0
-  showOverlay: 0
-  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
 --- !u!114 &7886646045897315865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -495,7 +459,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2633701579526999568}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
@@ -593,9 +557,12 @@ MonoBehaviour:
   isJumping: 0
   selectedWeapon: 0
   weaponSwitching: {fileID: 9021301564304592716}
-  weapon1: {fileID: 217703716726436728}
-  weapon2: {fileID: 6942656298859941706}
-  weapon3: {fileID: 5738629241591984883}
+  weaponPistol: {fileID: 217703716726436728}
+  weaponRifle: {fileID: 6942656298859941706}
+  weaponHeavy: {fileID: 5738629241591984883}
+  pistolCamera: {fileID: 6985411754525692153}
+  rifleCamera: {fileID: 1296215013427354185}
+  heavyCamera: {fileID: 1095725636599297361}
 --- !u!114 &1395202575252552669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -687,6 +654,45 @@ MonoBehaviour:
   playerScript: {fileID: 5062523710966536456}
   setupUI: {fileID: 4185513308988491658}
   weaponSwitching: {fileID: 9021301564304592716}
+  rb: {fileID: 2633701579526999572}
+  characterController: {fileID: 2633701579526999575}
+--- !u!114 &8467743228634223416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2633701579526999568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 1
+  sendRate: 120
+  bufferTimeMultiplier: 2
+  bufferSizeLimit: 64
+  catchupNegativeThreshold: -1
+  catchupPositiveThreshold: 1
+  catchupSpeed: 0.009999999776482582
+  slowdownSpeed: 0.009999999776482582
+  driftEmaDuration: 1
+  dynamicAdjustment: 1
+  dynamicAdjustmentTolerance: 1
+  deliveryTimeEmaDuration: 2
+  onlySyncOnChange: 1
+  bufferResetMultiplier: 5
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
 --- !u!114 &7091987648852339861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -724,8 +730,46 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  target: {fileID: 2633701577673671521}
+--- !u!114 &4396730374653105465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2633701579526999568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 734b48bea0b204338958ee3d885e11f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 1
+  sendRate: 120
+  bufferTimeMultiplier: 2
+  bufferSizeLimit: 64
+  catchupNegativeThreshold: -1
+  catchupPositiveThreshold: 1
+  catchupSpeed: 0.009999999776482582
+  slowdownSpeed: 0.009999999776482582
+  driftEmaDuration: 1
+  dynamicAdjustment: 1
+  dynamicAdjustmentTolerance: 1
+  deliveryTimeEmaDuration: 2
+  onlySyncOnChange: 1
+  bufferResetMultiplier: 5
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   target: {fileID: 598592602403678658}
---- !u!114 &7812761712239776986
+--- !u!114 &971348257622270491
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -763,7 +807,7 @@ MonoBehaviour:
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   target: {fileID: 7715393703939708400}
---- !u!114 &723975116661219681
+--- !u!114 &2413363376846680149
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1699,7 +1743,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &86050173494543594
 Transform:
   m_ObjectHideFlags: 0
@@ -1806,7 +1850,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 9037673976214952705}
-  selectedWeapon2: 0
+  pistolCamera: {fileID: 6985411754525692153}
+  rifleCamera: {fileID: 1296215013427354185}
+  heavyCamera: {fileID: 1095725636599297361}
 --- !u!1001 &218130594052610548
 PrefabInstance:
   m_ObjectHideFlags: 0

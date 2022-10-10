@@ -54,7 +54,6 @@ public class Player : NetworkBehaviour
       if(!isLocalPlayer)
       {
        string newPlayer = transform.name;
-       Debug.Log(transform.name + " is running SetupPlayer.");
        CmdBroadCastNewPlayerSetup(newPlayer);
       }
   }
@@ -79,7 +78,6 @@ private void RpcSetupPlayerOnAllClients(string newPlayer)
       }
       firstSetup = false;
   }
-      Debug.Log("Setting defaults for " + transform.name);
       SetDefaults();
   }
   
@@ -103,9 +101,13 @@ public void SetDefaults ()
 
    // Components to enable
     characterController = GetComponent<CharacterController>();
+    if (characterController == false)
     characterController.enabled = true;
+    if (playerController == false)
+    {
     playerController.enabled = true;
     Debug.Log("Character controller enabled.");
+    }
 
 
     meshRen.enabled = true;

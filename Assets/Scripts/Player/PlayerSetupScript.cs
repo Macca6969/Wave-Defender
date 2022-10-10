@@ -12,6 +12,7 @@ public class PlayerSetupScript : NetworkBehaviour
 
 
 public InputController inputController;
+public PlayerInput playerInput;
 public PlayerController playerController;
 public PlayerLook playerLook;
 public Camera cam;
@@ -19,6 +20,8 @@ public GameObject playerUI;
 public Player playerScript;
 public SetupUI setupUI;
 public WeaponSwitching weaponSwitching;
+public Rigidbody rb;
+public CharacterController characterController;
 
 
 private void Start() 
@@ -43,8 +46,6 @@ public override void OnStartLocalPlayer()
 {
 
 //disable by default on player prefab
-if (isLocalPlayer)
-{
   
   inputController.enabled = true;
   playerController.enabled = true;
@@ -53,11 +54,6 @@ if (isLocalPlayer)
   cam.gameObject.SetActive(true);
   playerUI.gameObject.SetActive(true);
   setupUI.SetupPlayerUI();
-
-
-}
-
-
 
 }
 

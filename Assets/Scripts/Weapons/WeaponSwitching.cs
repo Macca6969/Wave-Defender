@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
 
 public class WeaponSwitching : MonoBehaviour
 {
@@ -9,12 +8,16 @@ public class WeaponSwitching : MonoBehaviour
     public PlayerController playerController;
 
 
-     public  int selectedWeapon2;
+     private  int selectedWeapon2;
+     [SerializeField] private Camera pistolCamera;
+     [SerializeField] private Camera rifleCamera;
+     [SerializeField] private Camera heavyCamera;
 
     private void Start()
      {
         selectedWeapon2 = 0;
         playerController.CmdSelectedWeapon(selectedWeapon2);
+        //WeaponCamera();
      }
 
 
@@ -43,10 +46,30 @@ public class WeaponSwitching : MonoBehaviour
         if (previousSelectedWeapon2 != selectedWeapon2)
         {
             playerController.CmdSelectedWeapon(selectedWeapon2);
+            //WeaponCamera();
         }
     }
 
-    
-
-
+    /*private void WeaponCamera()
+    {
+        if (selectedWeapon2 == 0)
+        {
+           pistolCamera.enabled = true;
+           rifleCamera.enabled = false;
+           heavyCamera.enabled = false;
+        }
+        if (selectedWeapon2 == 1)
+        {
+           pistolCamera.enabled = false;
+           rifleCamera.enabled = true;
+           heavyCamera.enabled = false;
+        }
+        if (selectedWeapon2 == 2)
+        {
+           pistolCamera.enabled = false;
+           rifleCamera.enabled = false;
+           heavyCamera.enabled = true;
+        }
+    }
+    */
 }
