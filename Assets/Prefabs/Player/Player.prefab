@@ -64,7 +64,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 2147483647
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -591,12 +591,11 @@ MonoBehaviour:
   isFalling: 0
   jumpHeight: 6
   isJumping: 0
-  weaponArray:
-  - {fileID: 0}
-  - {fileID: 217703716726436728}
-  - {fileID: 6942656298859941706}
-  - {fileID: 5738629241591984883}
-  activeWeaponSynced: 0
+  selectedWeapon: 0
+  weaponSwitching: {fileID: 9021301564304592716}
+  weapon1: {fileID: 217703716726436728}
+  weapon2: {fileID: 6942656298859941706}
+  weapon3: {fileID: 5738629241591984883}
 --- !u!114 &1395202575252552669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,6 +610,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InvertMouseY: 0
   playerController: {fileID: 9037673976214952705}
+  weaponSwitching: {fileID: 9021301564304592716}
   lookInput: {x: 0, y: 0}
   movementInput: {x: 0, y: 0}
   mouseScrollY: 0
@@ -686,6 +686,7 @@ MonoBehaviour:
   playerUI: {fileID: 4390142009596837169}
   playerScript: {fileID: 5062523710966536456}
   setupUI: {fileID: 4185513308988491658}
+  weaponSwitching: {fileID: 9021301564304592716}
 --- !u!114 &7091987648852339861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -834,10 +835,10 @@ RectTransform:
   m_Father: {fileID: 4390142009596837170}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1379.9109, y: -703.2233}
-  m_SizeDelta: {x: 178.1783, y: 57.5533}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -98, y: 38}
+  m_SizeDelta: {x: 178.17834, y: 57.553284}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4390142008424631568
 CanvasRenderer:
@@ -1021,8 +1022,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 323.15814, y: -74.255615}
-  m_SizeDelta: {x: 646.3162, y: 148.5111}
+  m_AnchoredPosition: {x: 259.91592, y: -44.11212}
+  m_SizeDelta: {x: 519.8317, y: 88.2241}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4390142009493694773
 CanvasRenderer:
@@ -1200,10 +1201,10 @@ RectTransform:
   m_Father: {fileID: 4390142009493694771}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 59.3482, y: -42}
-  m_SizeDelta: {x: 482.5724, y: 26.9555}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 310.64505, y: -67.22687}
+  m_SizeDelta: {x: 409.2823, y: 30.5018}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4390142009973234076
 CanvasRenderer:
@@ -1276,7 +1277,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -282, y: 24}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4390142009978127738
 CanvasRenderer:
@@ -1333,7 +1334,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27.7
+  m_fontSize: 21.9
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1369,7 +1370,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 10, z: 0, w: 10}
+  m_margin: {x: 0, y: 3, z: 0, w: 3}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1481,10 +1482,10 @@ RectTransform:
   m_Father: {fileID: 4390142008424631582}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 127.56299, y: -29}
-  m_SizeDelta: {x: 88.9866, y: 50}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -89, y: 29}
+  m_SizeDelta: {x: 178, y: 58}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4390142010258006184
 CanvasRenderer:
@@ -1543,7 +1544,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31.2
+  m_fontSize: 51.9
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1579,7 +1580,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0.12536621, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1766,6 +1767,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1588317870320079613}
+  - component: {fileID: 9021301564304592716}
   m_Layer: 0
   m_Name: Weapons
   m_TagString: Untagged
@@ -1791,6 +1793,20 @@ Transform:
   m_Father: {fileID: 2633701579245516957}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9021301564304592716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6272263485826438627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8055836511025488e5f31ca571d3f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 9037673976214952705}
+  selectedWeapon2: 0
 --- !u!1001 &218130594052610548
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2082,7 +2098,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6844035175205671808, guid: d825a8b071a2618479ab92256335e787, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6930310940454695685, guid: d825a8b071a2618479ab92256335e787, type: 3}
       propertyPath: m_Layer

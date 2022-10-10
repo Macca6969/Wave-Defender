@@ -18,6 +18,7 @@ public Camera cam;
 public GameObject playerUI;
 public Player playerScript;
 public SetupUI setupUI;
+public WeaponSwitching weaponSwitching;
 
 
 private void Start() 
@@ -48,9 +49,11 @@ if (isLocalPlayer)
   inputController.enabled = true;
   playerController.enabled = true;
   playerLook.enabled = true;
+  weaponSwitching.enabled = true;
   cam.gameObject.SetActive(true);
   playerUI.gameObject.SetActive(true);
   setupUI.SetupPlayerUI();
+
 
 }
 

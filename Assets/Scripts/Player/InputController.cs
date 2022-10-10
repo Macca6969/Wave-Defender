@@ -9,6 +9,7 @@ public class InputController : MonoBehaviour
 
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private PlayerController playerController;
+    [SerializeField] private WeaponSwitching weaponSwitching;
 
 
     [SerializeField] public Vector2 lookInput;
@@ -56,7 +57,7 @@ public class InputController : MonoBehaviour
         playerInput.OnFoot.Reload.started += context => playerController.PlayerReload(context);
 
         playerInput.OnFoot.ChangeWeapon.started += context => mouseScrollY = context.ReadValue<float>();
-        playerInput.OnFoot.ChangeWeapon.performed += context => playerController.ChangeWeapon(mouseScrollY);
+        playerInput.OnFoot.ChangeWeapon.performed += context => weaponSwitching.ChangeWeapon(mouseScrollY);
 
     }
 
@@ -83,7 +84,7 @@ public class InputController : MonoBehaviour
         playerInput.OnFoot.Reload.started -= context => playerController.PlayerReload(context);
 
         playerInput.OnFoot.ChangeWeapon.started -= context => mouseScrollY = context.ReadValue<float>();
-        playerInput.OnFoot.ChangeWeapon.performed -= context => playerController.ChangeWeapon(mouseScrollY);
+        playerInput.OnFoot.ChangeWeapon.performed -= context => weaponSwitching.ChangeWeapon(mouseScrollY);
 
     }
 

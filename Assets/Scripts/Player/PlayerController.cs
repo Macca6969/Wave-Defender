@@ -55,12 +55,12 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] public bool isJumping;
 
     [Header("Weapon Changing")]
-    private int selectedWeaponLocal = 1;
-    public GameObject[] weaponArray;
-
-
-    [SyncVar(hook = nameof(OnWeaponChanged))]
-    public int activeWeaponSynced = 1;
+    [SyncVar(hook = nameof(SelectWeapon))]
+    public int selectedWeapon = 0;
+    public WeaponSwitching weaponSwitching;
+    public GameObject weapon1;
+    public GameObject weapon2;
+    public GameObject weapon3;
 
 
 
@@ -73,10 +73,6 @@ public class PlayerController : NetworkBehaviour
         input = GetComponent<InputController>();
         controller = GetComponent<CharacterController>();
 
-        foreach (var item in weaponArray)
-        if (item != null)
-            item.SetActive(false); 
-    
 
     }
 
@@ -211,55 +207,36 @@ public class PlayerController : NetworkBehaviour
         //pistol.PistolReload();
         Debug.Log("reload 1");
     }
-
-    public void ChangeWeapon(float mouseScrollY)
+  
+    [Command(requiresAuthority = false)] 
+    public void CmdSelectedWeapon(int selectedWeapon2)
     {
-        if (mouseScrollY > 0f)
-        {
-            Debug.Log("ChangeWeapon up.");
-            selectedWeaponLocal += 1;
-            if (selectedWeaponLocal > weaponArray.Length)
-             {
-                selectedWeaponLocal = 1;
-                CmdChangeActiveWeapon(selectedWeaponLocal);
-                
-             }
-        }
-         if (mouseScrollY < 0f)
-        {
-            Debug.Log("ChangeWeapon down.");
-            selectedWeaponLocal -= 1;
-            if (selectedWeaponLocal > weaponArray.Length)
-             {
-                selectedWeaponLocal = 1;
-                CmdChangeActiveWeapon(selectedWeaponLocal);
-                
-             }
-        }
-    
+        selectedWeapon = selectedWeapon2;
     }
-        
 
-    void OnWeaponChanged(int _Old, int _New)
-{
-    // disable old weapon
-    // in range and not null
-    Debug.Log(" OnWeaponChanged.");
-    if (0 < _Old && _Old < weaponArray.Length && weaponArray[_Old] != null)
-        weaponArray[_Old].SetActive(false);
-    
-    // enable new weapon
-    // in range and not null
-    if (0 < _New && _New < weaponArray.Length && weaponArray[_New] != null)
-        weaponArray[_New].SetActive(true);
-}
+   public void SelectWeapon(int weaponOld, int weaponNew)
+    {
+              if (selectedWeapon == 0)
+              {
+                  weapon1.SetActive(true);
+                  weapon2.SetActive(false);
+                  weapon3.SetActive(false);
+              }
 
-[Command]
- public void CmdChangeActiveWeapon(int newIndex)
-{
-    activeWeaponSynced = newIndex;
-    Debug.Log("CmdChangeWeapon " + newIndex);
-}
+              if (selectedWeapon == 1)
+              {
+                  weapon1.SetActive(false);
+                  weapon2.SetActive(true);
+                  weapon3.SetActive(false);
+              }
+
+              if (selectedWeapon == 2)
+              {
+                  weapon1.SetActive(false);
+                  weapon2.SetActive(false);
+                  weapon3.SetActive(true);   
+              }
+    }
 
 
 }
