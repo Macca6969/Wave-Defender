@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - PlayerRifle
+  - PlayerPistol
+  - PlayerHeavy
   layers:
   - Default
   - TransparentFX
@@ -31,9 +34,9 @@ TagManager:
   - 
   - 
   - Post-Processing
-  - 
+  - Goggles
   - PlayerWeapons
-  - 
+  - Player
   - 
   - 
   - 

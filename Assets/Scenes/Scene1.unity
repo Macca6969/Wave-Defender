@@ -175,7 +175,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 06f2b1eca17cf1d4290dfde72d7d8460, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -774,7 +774,7 @@ MonoBehaviour:
   networkAddress: 180.150.91.42
   maxConnections: 10
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 2633701579526999568, guid: 92e2557f8d8dc754a965e3e513bf941c, type: 3}
+  playerPrefab: {fileID: 9098161790655698285, guid: 9e4aaffd2a5e7584fbd4f072371e080d, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs:
