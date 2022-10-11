@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Mirror;
 
-public class LevelScript : MonoBehaviour
+public class LevelScript : NetworkBehaviour
 {
-
-    public int level;
-    public float currentXp;
-    public float requiredXp;
 
     private float lerpTimer;
     private float delayTimer;
+    public Player player;
 
     [Header("UI")]
     public Image frontXpBar;
@@ -35,10 +33,10 @@ public class LevelScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        frontXpBar.fillAmount = currentXp / requiredXp;
-        backXpBar.fillAmount = currentXp / requiredXp;
-        requiredXp = CalculateRequiredXp();
-        levelText.text = level.ToString();
+        frontXpBar.fillAmount = player.currentXp / player.requiredXp;
+        backXpBar.fillAmount = player.currentXp / player.requiredXp;
+        player.requiredXp = CalculateRequiredXp();
+        levelText.text = player.playerCurrentLevel.ToString();
     }
 
     // Update is called once per frame
@@ -50,7 +48,7 @@ public class LevelScript : MonoBehaviour
             GainExperienceFlatRate(20);
         }
 
-        if (currentXp > requiredXp)
+        if (player.currentXp > player.requiredXp)
         {
             LevelUp();
         }
@@ -58,7 +56,7 @@ public class LevelScript : MonoBehaviour
 
     public void UpdateXpUI()
     {
-        float xpFraction = currentXp / requiredXp;
+        float xpFraction = player.currentXp / player.requiredXp;
         float FXP = frontXpBar.fillAmount;
 
         if(FXP < xpFraction)
@@ -72,31 +70,38 @@ public class LevelScript : MonoBehaviour
                 frontXpBar.fillAmount = Mathf.Lerp(FXP, backXpBar.fillAmount, percentComplete);
             }
         }
-        xpText.text = currentXp + "/" + requiredXp;
+        xpText.text = player.currentXp + "/" + player.requiredXp;
     }
 
     public void GainExperienceFlatRate(float xpGained)
     {
-        currentXp += xpGained;
+        player.currentXp += xpGained;
         lerpTimer = 0f;
     }
 
     public void LevelUp()
     {
-         level++;
+         CmdLevelUp();
          frontXpBar.fillAmount = 0f;
          backXpBar.fillAmount = 0f;
-         currentXp = Mathf.RoundToInt(currentXp - requiredXp);
+         player.currentXp = Mathf.RoundToInt(player.currentXp - player.requiredXp);
          //alter attributes here
-         GetComponent<PlayerHealth>().IncreaseHealth(level);
-         requiredXp = CalculateRequiredXp();
-         levelText.text = level.ToString();
+         GetComponent<PlayerHealth>().IncreaseHealth(player.playerCurrentLevel);
+         player.requiredXp = CalculateRequiredXp();
+         levelText.text = player.playerCurrentLevel.ToString();
+    }
+
+     [Command(requiresAuthority = false)]
+    public void CmdLevelUp()
+    {
+        player.playerCurrentLevel++;
+
     }
 
     private int CalculateRequiredXp()
     {
         int solveForRequiredXp = 0;
-        for (int levelCycle = 1; levelCycle <= level; levelCycle++)
+        for (int levelCycle = 1; levelCycle <= player.playerCurrentLevel; levelCycle++)
         {
               solveForRequiredXp += (int)Mathf.Floor(levelCycle + additionMultiplier * Mathf.Pow(powerMultiplier, levelCycle / divisionMultiplier));
         }
@@ -105,14 +110,14 @@ public class LevelScript : MonoBehaviour
 
     public void GainExperienceScalable(float xpGained, int passedLevel)
     {
-        if (passedLevel < level)
+        if (passedLevel < player.playerCurrentLevel)
         {
-            float multiplier = 1 + (level - passedLevel) * 0.1f;
-            currentXp += xpGained * multiplier; 
+            float multiplier = 1 + (player.playerCurrentLevel - passedLevel) * 0.1f;
+            player.currentXp += xpGained * multiplier; 
         }
         else
         {
-            currentXp += xpGained;
+            player.currentXp += xpGained;
         }
         lerpTimer = 0f;
         delayTimer = 0f;

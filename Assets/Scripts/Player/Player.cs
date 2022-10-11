@@ -31,13 +31,16 @@ public class Player : NetworkBehaviour
   [SerializeField] private bool [] wasEnabled;
   [SerializeField] private Behaviour[] disableOnDeath;
   
-  [SerializeField] public int playerMaxHealth = 100;
   [SerializeField] public int playerLevel = 5;
   [SerializeField] private bool firstSetup = true;
 
   [Header("Sync Vars")]
+  [SerializeField] public int playerMaxHealth = 100;
   [SyncVar] public int playerCurrentHealth;
   [SyncVar] public int playerCurrentLevel;
+  [SyncVar] public float currentXp;
+  [SyncVar] public float requiredXp;
+
   [SyncVar] private bool _isDead = false;
   public bool isDead 
   {

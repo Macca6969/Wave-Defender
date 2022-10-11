@@ -2612,11 +2612,14 @@ MonoBehaviour:
   playerController: {fileID: 2856307772835922044}
   wasEnabled: 
   disableOnDeath: []
-  playerMaxHealth: 100
   playerLevel: 5
   firstSetup: 1
+  playerMaxHealth: 100
   playerCurrentHealth: 0
   playerCurrentLevel: 0
+  level: 0
+  currentXp: 0
+  requiredXp: 0
   selectedWeapon: 0
 --- !u!114 &1728477862463476053
 MonoBehaviour:
@@ -2845,10 +2848,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05a48f01410227241ae54298a521a440, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  levelHealthMultiplier: 2
   chipSpeed: 2
   frontHealthBar: {fileID: 209259728310065488}
   backHealthBar: {fileID: 8445296765474242258}
+  player: {fileID: 2057672437782282869}
   healthText: {fileID: 5235759646151503478}
 --- !u!114 &9073281325595253203
 MonoBehaviour:
@@ -2862,9 +2866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62b35cc9f1d2b34e86a83d6b42b71a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 1
-  currentXp: 0
-  requiredXp: 120
+  player: {fileID: 2057672437782282869}
   frontXpBar: {fileID: 5506571098339066738}
   backXpBar: {fileID: 1104388890860395737}
   levelText: {fileID: 6949310087732423301}
