@@ -10,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
     private float health;
     private float lerpTimer;
     public float maxHealth = 100;
+    public float levelHealthMultiplier = 2;
     public float chipSpeed = 0.5f;
     public Image frontHealthBar;
     public Image backHealthBar;
@@ -81,7 +82,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void IncreaseHealth(int level)
     {
-             maxHealth += (health * 0.01f) * ((100 - level) * 0.1f);
+             maxHealth += (health * 0.01f) * ((100 - level) * (levelHealthMultiplier / 10));
              health = maxHealth;
     }
 }

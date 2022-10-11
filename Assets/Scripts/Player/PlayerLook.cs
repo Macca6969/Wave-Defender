@@ -38,10 +38,10 @@ public class PlayerLook : MonoBehaviour
          float mouseX = lookInput.x;
          float mouseY = lookInput.y;
 
-         xRotation -= (mouseY * Time.deltaTime) * ySensitivity;
+         xRotation -= (mouseY * ySensitivity) / 10;
          xRotation = Mathf.Clamp(xRotation, -80f, 80);
 
         wep.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
-        transform.Rotate(Vector3.up * (mouseX * Time.deltaTime) * xSensitivity);
+        transform.Rotate(Vector3.up * (mouseX  * xSensitivity) / 10);
     }
 }
