@@ -11,6 +11,7 @@ public class AudioScript : NetworkBehaviour
   [SerializeField] public AudioSource walkingConcrete;
   [SerializeField] public AudioSource playerHealed;
   [SerializeField] public AudioSource playerLevelUp;
+  [SerializeField] public AudioSource playerRevived;
 
   [Header("Pistol")]
   [SerializeField] public AudioSource pistolShoot;

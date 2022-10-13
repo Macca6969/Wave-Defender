@@ -16,7 +16,9 @@ public class PlayerController : NetworkBehaviour
     public static PlayerController instance;
     private CharacterController controller;
     public Player player;
-   
+    public AudioScript audioScript;
+    public ManageUI manageUI;
+
 
     [Header("Movement")]
     [SerializeField] public float movementSpeed = default;
@@ -83,7 +85,7 @@ public class PlayerController : NetworkBehaviour
         HandleFalling();
     }
 
-    
+
     private void HandleMovementInput()
     {
         movementInput = input.movementInput;
@@ -94,7 +96,7 @@ public class PlayerController : NetworkBehaviour
         controller.Move(movementInputDirection * movementSpeed * Time.deltaTime);
         controller.Move(playerVelocity * Time.deltaTime);
 
-       playerVelocity.y += Physics.gravity.y * Time.deltaTime;
+        playerVelocity.y += Physics.gravity.y * Time.deltaTime;
 
         if (movementInput != Vector3.zero)
         {
@@ -128,7 +130,7 @@ public class PlayerController : NetworkBehaviour
         }
         playerVelocity.y += gravity * Time.deltaTime;
     }
-    
+
     public void ResetMovementSpeed(InputAction.CallbackContext context)
     {
         movementSpeed = walkSpeed;
@@ -197,45 +199,52 @@ public class PlayerController : NetworkBehaviour
     {
         playerShooting = false;
     }
-    
+
     public void PlayerReload(InputAction.CallbackContext context)
     {
         //pistol.PistolReload();
         Debug.Log("reload 1");
     }
-  
-  
-    [Command(requiresAuthority = false)] 
+
+
+    [Command(requiresAuthority = false)]
     public void CmdSelectedWeapon(int selectedWeapon2)
     {
         selectedWeapon = selectedWeapon2;
     }
 
-   public void SelectWeapon(int weaponOld, int weaponNew)
+    public void SelectWeapon(int weaponOld, int weaponNew)
     {
-              
-              if (selectedWeapon == 0)
-              {
-                  weaponPistol.SetActive(true);
-                  weaponRifle.SetActive(false);
-                  weaponHeavy.SetActive(false);
-              }
 
-              if (selectedWeapon == 1)
-              {
-                  weaponPistol.SetActive(false);
-                  weaponRifle.SetActive(true);
-                  weaponHeavy.SetActive(false);
-              }
+        if (selectedWeapon == 0)
+        {
+            weaponPistol.SetActive(true);
+            weaponRifle.SetActive(false);
+            weaponHeavy.SetActive(false);
+            audioScript.pistolSelect.Play();
+            manageUI.UpdateAmmoUI();
+        }
 
-              if (selectedWeapon == 2)
-              {
-                  weaponPistol.SetActive(false);
-                  weaponRifle.SetActive(false);
-                  weaponHeavy.SetActive(true); 
-              }
-    } 
-    
+        if (selectedWeapon == 1)
+        {
+            weaponPistol.SetActive(false);
+            weaponRifle.SetActive(true);
+            weaponHeavy.SetActive(false);
+            audioScript.rifleSelect.Play();
+            manageUI.UpdateAmmoUI();
+        }
+
+        if (selectedWeapon == 2)
+        {
+            weaponPistol.SetActive(false);
+            weaponRifle.SetActive(false);
+            weaponHeavy.SetActive(true);
+            audioScript.heavySelect.Play();
+            manageUI.UpdateAmmoUI();
+        }
+        
+    }
+
 }
 
-    
+

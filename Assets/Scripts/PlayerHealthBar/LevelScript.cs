@@ -11,6 +11,7 @@ public class LevelScript : NetworkBehaviour
     private float lerpTimer;
     private float delayTimer;
     public Player player;
+    [SerializeField] public AudioScript audioScript;
 
     [Header("UI")]
     public Image frontXpBar;
@@ -89,6 +90,7 @@ public class LevelScript : NetworkBehaviour
          GetComponent<PlayerHealth>().IncreaseHealth(player.playerCurrentLevel);
          player.requiredXp = CalculateRequiredXp();
          levelText.text = player.playerCurrentLevel.ToString();
+         audioScript.playerLevelUp.Play();
     }
 
      [Command(requiresAuthority = false)]

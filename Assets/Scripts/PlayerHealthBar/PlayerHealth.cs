@@ -23,6 +23,7 @@ public class PlayerHealth : NetworkBehaviour
 
     public int healthIncrement;
     public MatchSettings matchSettings;
+    public AudioScript audioScript;
 
     public TextMeshProUGUI healthText;
     // Start is called before the first frame update
@@ -95,6 +96,8 @@ public class PlayerHealth : NetworkBehaviour
         if (player.playerCurrentHealth < player.playerMaxHealth)
         player.playerCurrentHealth += healAmount;
         lerpTimer = 0f;
+        audioScript.playerHealed.Play();
+
     }
 
     public void IncreaseHealth(int playerLevel)
