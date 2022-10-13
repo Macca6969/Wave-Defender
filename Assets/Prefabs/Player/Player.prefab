@@ -312,7 +312,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992039007666933406}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.01, z: 0}
+  m_LocalPosition: {x: 0.514, y: 0.124, z: 0.425}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -335,6 +335,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 2856307772835922044}
+--- !u!1 &1845763866525287423
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7979384709641037597}
+  m_Layer: 27
+  m_Name: MuzzleFlash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7979384709641037597
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845763866525287423}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.00448, z: 0.05628}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3593157691714539149}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2116910270973556285
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,7 +468,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2810504477879061413}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.18899995, y: 0.508, z: -0.424}
+  m_LocalPosition: {x: 0.06, y: 0.508, z: -0.254}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -469,13 +500,13 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 1000
-  field of view: 41.2
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: -100
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 134217728
+    m_Bits: 150994944
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -624,7 +655,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3194448585948168218}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.59499985, z: 0.80700004}
+  m_LocalPosition: {x: 0, y: 0.6079998, z: 0.656}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -689,8 +720,10 @@ MonoBehaviour:
   m_RenderShadows: 1
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 1
-  m_Cameras: []
+  m_CameraType: 0
+  m_Cameras:
+  - {fileID: 3097790862399037556}
+  - {fileID: 1599100964773324320}
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
@@ -749,6 +782,68 @@ RectTransform:
   m_AnchoredPosition: {x: 544.2561, y: 120.42145}
   m_SizeDelta: {x: 1151.8203, y: 293.2009}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &4047757798600938356
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3287217049401836182}
+  m_Layer: 27
+  m_Name: MuzzleFlash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3287217049401836182
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4047757798600938356}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.01273, z: 0.02625}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5945104025529987775}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4460110101461101371
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7418351826526086012}
+  m_Layer: 27
+  m_Name: MuzzleFlash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7418351826526086012
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4460110101461101371}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.0211, z: 0.09217}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2172850586619556660}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4739477128302095442
 GameObject:
   m_ObjectHideFlags: 0
@@ -852,7 +947,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4878466905030325604}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.60799986, z: 0.03699994}
+  m_LocalPosition: {x: 0, y: 0.60799986, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -925,7 +1020,7 @@ MonoBehaviour:
   m_RenderShadows: 1
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 0
+  m_CameraType: 1
   m_Cameras:
   - {fileID: 1599100964773324320}
   - {fileID: 5598884481930220089}
@@ -2275,7 +2370,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9098161790380349443}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.037, y: -0.152, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2314,7 +2409,9 @@ GameObject:
   - component: {fileID: 6319971156363458918}
   - component: {fileID: 8913218929395313448}
   - component: {fileID: 8055186398172705719}
+  - component: {fileID: 5441220378068944583}
   - component: {fileID: 9073281325595253203}
+  - component: {fileID: 306396828775223357}
   m_Layer: 28
   m_Name: Player
   m_TagString: Player
@@ -2549,6 +2646,8 @@ MonoBehaviour:
   weaponPistol: {fileID: 6470142351590680581}
   weaponRifle: {fileID: 4221743457383470135}
   weaponHeavy: {fileID: 1543701905421986190}
+  weaponManager: {fileID: 306396828775223357}
+  playerShooting: 0
 --- !u!114 &5301617511612309664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2576,16 +2675,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 9098161790655698285}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecdcef0b4abe9244b975226bc1249c5c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b8fe6b710e462941a0360b95b935721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  healthBarImage: {fileID: 7359737991077765924}
-  healthTextUI: {fileID: 7359737992170381050}
-  ammoTextUI: {fileID: 7359737991913651144}
-  playerUI: {fileID: 7359737992561223244}
-  player: {fileID: 2057672437782282869}
+  healthBarImage: {fileID: 0}
+  healthTextUI: {fileID: 0}
+  ammoTextUI: {fileID: 0}
+  playerUI: {fileID: 0}
+  player: {fileID: 0}
 --- !u!114 &2057672437782282869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2610,14 +2709,14 @@ MonoBehaviour:
   levelTextUI: {fileID: 0}
   audioScript: {fileID: 3977849156880746042}
   playerController: {fileID: 2856307772835922044}
+  setupUI: {fileID: 6978906506857733367}
+  matchSettings: {fileID: 5441220378068944583}
   wasEnabled: 
   disableOnDeath: []
-  playerLevel: 5
   firstSetup: 1
   playerMaxHealth: 100
   playerCurrentHealth: 0
   playerCurrentLevel: 0
-  level: 0
   currentXp: 0
   requiredXp: 0
   selectedWeapon: 0
@@ -2848,12 +2947,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05a48f01410227241ae54298a521a440, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   levelHealthMultiplier: 2
   chipSpeed: 2
   frontHealthBar: {fileID: 209259728310065488}
   backHealthBar: {fileID: 8445296765474242258}
   player: {fileID: 2057672437782282869}
+  healthIncrement: 0
+  matchSettings: {fileID: 5441220378068944583}
   healthText: {fileID: 5235759646151503478}
+--- !u!114 &5441220378068944583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9098161790655698285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d556eb42613e40245b294c474a50d211, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnTime: 3
+  setMaxHealth: 150
 --- !u!114 &9073281325595253203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2866,6 +2983,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62b35cc9f1d2b34e86a83d6b42b71a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   player: {fileID: 2057672437782282869}
   frontXpBar: {fileID: 5506571098339066738}
   backXpBar: {fileID: 1104388890860395737}
@@ -2874,6 +2993,56 @@ MonoBehaviour:
   additionMultiplier: 300
   powerMultiplier: 2
   divisionMultiplier: 7
+--- !u!114 &306396828775223357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9098161790655698285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63c8440419b2d28439d586d8b816c980, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  player: {fileID: 2057672437782282869}
+  playerController: {fileID: 2856307772835922044}
+  cam: {fileID: 5598884481930220089}
+  pistolFireRate: 0.1
+  pistolBulletSpeed: 100
+  pistolDamage: 10
+  pistolMagSize: 30
+  pistolCurrentAmmo: 170
+  pistolCurrentClip: 30
+  pistolMaxAmmo: 170
+  pistolReloadSpeed: 0.8
+  pistolBulletSpawnPoint: {fileID: 3287217049401836182}
+  pistolMuzzleFlash: {fileID: 4047757798600938356}
+  pistolBulletTrail: {fileID: -6951808740216008255, guid: b4bc96b0a30aca648a1f9c07851f46d9, type: 3}
+  rifleFireRate: 0.02
+  rifleBulletSpeed: 200
+  rifleDamage: 2
+  rifleMagSize: 90
+  rifleCurrentAmmo: 500
+  rifleCurrentClip: 130
+  rifleMaxAmmo: 500
+  rifleReloadSpeed: 1.6
+  rifleBulletSpawnPoint: {fileID: 7979384709641037597}
+  rifleBulletTrail: {fileID: -4461844327463083629, guid: 305ea5c00b313244fb3e211d09cef798, type: 3}
+  rifleMuzzleFlash: {fileID: 1845763866525287423}
+  heavyFireRate: 1
+  heavyBulletSpeed: 30
+  heavyDamage: 35
+  heavyMagSize: 12
+  heavyCurrentAmmo: 78
+  heavyCurrentClip: 12
+  heavyMaxAmmo: 78
+  heavyReloadSpeed: 2.5
+  heavyBulletSpawnPoint: {fileID: 7418351826526086012}
+  heavyBulletTrail: {fileID: -130222676552222968, guid: 012351e59308ced489bb4e25563de594, type: 3}
+  heavyMuzzleFlash: {fileID: 4460110101461101371}
 --- !u!1 &9098161791012660199
 GameObject:
   m_ObjectHideFlags: 0
@@ -2898,7 +3067,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9098161791012660199}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.486, y: 0.277, z: 0.198}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

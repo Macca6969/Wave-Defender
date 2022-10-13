@@ -20,7 +20,7 @@ public Camera wepCam;
 public Camera otherCam;
 public GameObject playerUI;
 public Player playerScript;
-public SetupUI setupUI;
+public ManageUI setupUI;
 public WeaponSwitching weaponSwitching;
 public Rigidbody rb;
 public CharacterController characterController;
@@ -58,6 +58,8 @@ public override void OnStartLocalPlayer()
   otherCam.gameObject.SetActive(true);
   playerUI.gameObject.SetActive(true);
   setupUI.SetupPlayerUI();
+
+  GetComponent<PlayerHealth>().SetupPlayerHealth();
 
 }
 

@@ -22,6 +22,7 @@ public class PlayerHealth : NetworkBehaviour
     public Player player;
 
     public int healthIncrement;
+    public MatchSettings matchSettings;
 
     public TextMeshProUGUI healthText;
     // Start is called before the first frame update
@@ -50,6 +51,7 @@ public class PlayerHealth : NetworkBehaviour
     {
          float fillF = frontHealthBar.fillAmount;
          float fillB = backHealthBar.fillAmount;
+         
          //sets our health to a range 0-1 to adjust health bar fill amount
          float tempCurrentHealth = (float)player.playerCurrentHealth;
          float tempMaxHealth = (float)player.playerMaxHealth * 1.0f;
@@ -80,8 +82,8 @@ public class PlayerHealth : NetworkBehaviour
 
     public void TakeDamage(int damage)
     {
-          player.playerCurrentHealth -= damage;
-          lerpTimer =0f;
+        player.playerCurrentHealth -= damage;
+        lerpTimer =0f;
     }
 
     public void RestoreHealth(int healAmount)
@@ -97,10 +99,7 @@ public class PlayerHealth : NetworkBehaviour
 
     public void IncreaseHealth(int playerLevel)
     {
-
         CmdIncreaseHealth(playerLevel);
-
-
     }
     
     [Command(requiresAuthority = false)]
@@ -108,6 +107,12 @@ public class PlayerHealth : NetworkBehaviour
     {  
         player.playerMaxHealth += healthIncrement;
         player.playerCurrentHealth = player.playerMaxHealth;
-        Debug.Log("Setting players max health to - " + player.playerMaxHealth);
+    }
+
+    [Command(requiresAuthority = false)]
+    public void SetupPlayerHealth()
+    {
+        int maxHealth = matchSettings.setMaxHealth;
+        player.playerMaxHealth = maxHealth;
     }
 }

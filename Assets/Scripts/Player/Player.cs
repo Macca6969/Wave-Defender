@@ -25,17 +25,17 @@ public class Player : NetworkBehaviour
   //[SerializeField] private Pistol pistol;
   [SerializeField] private AudioScript audioScript;
   [SerializeField] private PlayerController playerController;
-  //[SerializeField] private SetupUI setupUI;
+  [SerializeField] private ManageUI setupUI;
+  [SerializeField] private MatchSettings matchSettings;
 
   [Header("Other")]
   [SerializeField] private bool [] wasEnabled;
   [SerializeField] private Behaviour[] disableOnDeath;
   
-  [SerializeField] public int playerLevel = 5;
   [SerializeField] private bool firstSetup = true;
 
   [Header("Sync Vars")]
-  [SerializeField] public int playerMaxHealth = 100;
+  [SyncVar] public int playerMaxHealth;
   [SyncVar] public int playerCurrentHealth;
   [SyncVar] public int playerCurrentLevel;
   [SyncVar] public float currentXp;
@@ -115,6 +115,8 @@ public void SetDefaults ()
 
     meshRen.enabled = true;
 
+
+
     
 
 }
@@ -122,6 +124,7 @@ public void SetDefaults ()
 private void Start()
  {
     playerCurrentHealth = playerMaxHealth;
+    playerMaxHealth = matchSettings.setMaxHealth;
  }
 
 
@@ -184,7 +187,7 @@ private void Die()
   
        IEnumerator Respawn (string playerRespawning)
        {  
-          yield return new WaitForSeconds (GameManager.instance.matchSettings.respawnTime);
+          yield return new WaitForSeconds (matchSettings.respawnTime);
 
           transform.position = NetworkManager.singleton.GetStartPosition().position;
           transform.rotation = Quaternion.Euler(0, 0, 0);

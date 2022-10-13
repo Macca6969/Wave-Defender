@@ -6,7 +6,7 @@ using TMPro;
 using Mirror;
 
 
-public class SetupUI : NetworkBehaviour
+public class ManageUI : NetworkBehaviour
 {
 
 [Header("UI Components")]

@@ -52,7 +52,8 @@ public class InputController : MonoBehaviour
 
         playerInput.OnFoot.Crouch.canceled += context => playerController.ResetPlayerHeight(context);
 
-        playerInput.OnFoot.Fire.started += context => playerController.PlayerFire(context);
+        playerInput.OnFoot.Fire.performed += context => playerController.PlayerFire(context);
+        playerInput.OnFoot.Fire.canceled += context => playerController.PlayerFireStop(context);
 
         playerInput.OnFoot.Reload.started += context => playerController.PlayerReload(context);
 
@@ -80,6 +81,7 @@ public class InputController : MonoBehaviour
         playerInput.OnFoot.Crouch.canceled -= context => playerController.ResetPlayerHeight(context);
 
         playerInput.OnFoot.Fire.started -= context => playerController.PlayerFire(context);
+        playerInput.OnFoot.Fire.canceled -= context => playerController.PlayerFireStop(context);
 
         playerInput.OnFoot.Reload.started -= context => playerController.PlayerReload(context);
 

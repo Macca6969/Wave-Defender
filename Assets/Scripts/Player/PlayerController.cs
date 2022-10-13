@@ -56,13 +56,15 @@ public class PlayerController : NetworkBehaviour
 
 
 
-    [Header("Weapon Changing")]
+    [Header("Weapons")]
     [SyncVar(hook = nameof(SelectWeapon))]
     public int selectedWeapon = 0;
     public WeaponSwitching weaponSwitching;
     public GameObject weaponPistol;
     public GameObject weaponRifle;
     public GameObject weaponHeavy;
+    public WeaponManager weaponManager;
+    [SerializeField] public bool playerShooting;
 
     void Awake()
     {
@@ -187,8 +189,13 @@ public class PlayerController : NetworkBehaviour
 
     public void PlayerFire(InputAction.CallbackContext context)
     {
-        //pistol.PistolFire();
-        Debug.Log("Firing Pistol");
+        playerShooting = true;
+        weaponManager.PlayerCheckWeapon(selectedWeapon, playerShooting);
+    }
+
+    public void PlayerFireStop(InputAction.CallbackContext context)
+    {
+        playerShooting = false;
     }
     
     public void PlayerReload(InputAction.CallbackContext context)
