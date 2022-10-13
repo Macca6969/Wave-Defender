@@ -140,7 +140,7 @@ public void RpcTakeDamage (int _amount)
     playerCurrentHealth -= _amount;
     //setupUI.UpdateHealthUI();
     Debug.Log(transform.name + "now has " + playerCurrentHealth + "health.");
-    audioScript.playerHitSound.Play();
+    //audioScript.playerHitSound.Play();
 
     if (playerCurrentHealth <= 0)
     {

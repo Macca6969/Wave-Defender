@@ -11,6 +11,8 @@ public class WeaponManager : NetworkBehaviour
 [Header("Scripts.")]
 public Player player;
 public PlayerController playerController;
+
+public AudioScript audioScript;
 [Header("Objects")]
 public Camera cam;
 
@@ -39,6 +41,7 @@ public float rifleReloadSpeed = 1.6f;
 [SerializeField] private Transform rifleBulletSpawnPoint;
 [SerializeField] private TrailRenderer rifleBulletTrail;
 [SerializeField] private GameObject rifleMuzzleFlash;
+[SerializeField] private AudioSource rifleShoot;
 
 [Header("Heavy Settings")]
 public int heavyFireRate;
@@ -52,6 +55,7 @@ public float heavyReloadSpeed = 2.5f;
 [SerializeField] private Transform heavyBulletSpawnPoint;
 [SerializeField] private TrailRenderer heavyBulletTrail;
 [SerializeField] private GameObject heavyMuzzleFlash;
+
 
 private bool isFiring;
 
@@ -145,7 +149,7 @@ public void PlayerCheckWeapon(int selectedWeapon, bool playerShooting)
                       {
                       isFiring = true;
                       //animator.Play("FirePistol");
-                      //audioScript.pistolShot.Play();
+                      audioScript.pistolShoot.Play();
                       
                       if (targetHit != "No Target")
                       {
@@ -175,7 +179,7 @@ public void PlayerCheckWeapon(int selectedWeapon, bool playerShooting)
 
                  if(!isFiring && pistolCurrentClip >=0 && !player.isDead)
                  {
-                       //audioScript.pistolEmpty.Play();
+                       audioScript.pistolEmpty.Play();
                  }
           }
          }
@@ -258,7 +262,7 @@ public void PlayerCheckWeapon(int selectedWeapon, bool playerShooting)
                       {
                       isFiring = true;
                       //animator.Play("FirePistol");
-                      //audioScript.pistolShot.Play();
+                      audioScript.rifleShoot.Play();
                       
                       if (targetHit != "No Target")
                       {
@@ -286,7 +290,7 @@ public void PlayerCheckWeapon(int selectedWeapon, bool playerShooting)
 
                  if(!isFiring && pistolCurrentClip >=0 && !player.isDead)
                  {
-                       //audioScript.pistolEmpty.Play();
+                       //audioScript.rifleEmpty.Play();
                  }
           }
          }
@@ -369,7 +373,7 @@ public void FiringHeavy(bool playerShooting)
                       {
                       isFiring = true;
                       //animator.Play("FirePistol");
-                      //audioScript.pistolShot.Play();
+                      audioScript.heavyShoot.Play();
                       
                       if (targetHit != "No Target")
                       {
@@ -386,7 +390,6 @@ public void FiringHeavy(bool playerShooting)
                       //muzzleFlash.SetActive(true);
                       yield return new WaitForSeconds(0.05f);
                       //muzzleFlash.SetActive(false);
-                      yield return new WaitForSeconds(0.05f);
                       //animator.Play("IdlePistol");
                       heavyCurrentClip = heavyCurrentClip - 1;
                       //ammoTextUI.GetComponent<TMP_Text>().text =  pistolCurrentClip + "/" + pistolCurrentAmmo;     Make ManageUI function to check weapon and refresh ammo display
