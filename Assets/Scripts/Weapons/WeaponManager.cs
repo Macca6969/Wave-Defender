@@ -17,6 +17,7 @@ public class WeaponManager : NetworkBehaviour
 
     [Header("Objects")]
     public Camera cam;
+    public Camera shootingCam;
 
     [Header("Pistol Settings")]
     public float pistolFireRate = 0.4f;
@@ -27,6 +28,8 @@ public class WeaponManager : NetworkBehaviour
     public int pistolCurrentClip = 7;
     public int pistolMaxAmmo = 50;
     public float pistolReloadSpeed = 0.8f;
+    public bool isReloadingPistol = false;
+    public bool needReloadPistol = false;
     [SerializeField] private Transform pistolBulletSpawnPoint;
     [SerializeField] private GameObject pistolMuzzleFlash;
     [SerializeField] private TrailRenderer pistolBulletTrail;
@@ -40,6 +43,8 @@ public class WeaponManager : NetworkBehaviour
     public int rifleCurrentClip = 21;
     public int rifleMaxAmmo = 50;
     public float rifleReloadSpeed = 1.6f;
+    public bool isReloadingRifle = false;
+    public bool needReloadRifle = false;
     [SerializeField] private Transform rifleBulletSpawnPoint;
     [SerializeField] private TrailRenderer rifleBulletTrail;
     [SerializeField] private GameObject rifleMuzzleFlash;
@@ -53,6 +58,8 @@ public class WeaponManager : NetworkBehaviour
     public int heavyCurrentClip = 6;
     public int heavyMaxAmmo = 36;
     public float heavyReloadSpeed = 2.5f;
+    public bool isReloadingHeavy = false;
+    public bool needReloadHeavy = false;
     [SerializeField] private Transform heavyBulletSpawnPoint;
     [SerializeField] private TrailRenderer heavyBulletTrail;
     [SerializeField] private GameObject heavyMuzzleFlash;
@@ -100,7 +107,7 @@ public class WeaponManager : NetworkBehaviour
             Quaternion quatID = Quaternion.identity;
             RaycastHit _hit;
 
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit))
+            if (Physics.Raycast(shootingCam.transform.position, shootingCam.transform.forward, out _hit))
             {
                 targetHit = _hit.collider.gameObject.name;
             }
@@ -139,8 +146,8 @@ public class WeaponManager : NetworkBehaviour
         if (transform.name == playerName)
         {
             RaycastHit _hit;
-            Vector3 direction = cam.transform.forward;
-            Physics.Raycast(cam.transform.position, direction, out _hit);
+            Vector3 direction = shootingCam.transform.forward;
+            Physics.Raycast(shootingCam.transform.position, direction, out _hit);
 
             if (!isFiring && pistolCurrentClip >= 1 && !player.isDead)
             {
@@ -161,7 +168,7 @@ public class WeaponManager : NetworkBehaviour
                 {
                     Debug.Log("We have shot nothing.");
                     TrailRenderer trail = Instantiate(pistolBulletTrail, pistolBulletSpawnPoint.position, quatID);
-                    StartCoroutine(SpawnPistolBulletTrail(trail, cam.transform.forward, Vector3.zero, false));
+                    StartCoroutine(SpawnPistolBulletTrail(trail, shootingCam.transform.forward * 100f, Vector3.zero, false));
                 }
 
                 //muzzleFlash.SetActive(true);
@@ -184,6 +191,57 @@ public class WeaponManager : NetworkBehaviour
             }
         }
     }
+
+    public void PistolReload()
+        {
+            string _player = gameObject.name;
+            CmdPlayerReloadingPistol(_player);
+        }
+
+        [Command(requiresAuthority = false)]
+        public void CmdPlayerReloadingPistol(string _player)
+        {
+              RpcPlayerReloadingPistol(_player);
+        }
+
+        [ClientRpc]
+        public void RpcPlayerReloadingPistol(string _player)
+         {
+            if(gameObject.name == _player)
+            
+               if (!isReloadingPistol)
+               {
+                StartCoroutine(Reload());
+               }
+                IEnumerator Reload()
+               {
+                Debug.Log (_player + " is reloading");
+                isReloadingPistol = true;
+                //animator.Play("Reload");
+                audioScript.pistolReload.Play();
+                yield return new WaitForSeconds (pistolReloadSpeed);
+                audioScript.pistolReload.Stop();
+                //animator.Play("IdlePistol");
+                int reloadAmount = pistolMagSize - pistolCurrentClip;
+                reloadAmount = (pistolCurrentAmmo - reloadAmount) >= 0 ? reloadAmount : pistolCurrentAmmo;
+                pistolCurrentClip += reloadAmount;
+                pistolCurrentAmmo -= reloadAmount;
+                manageUI.UpdateAmmoUI();
+                needReloadPistol = false;
+                isReloadingPistol = false;
+               }
+            }
+
+            public void AddAmmoPistol(int ammoAmount)
+            {
+               pistolCurrentAmmo += ammoAmount;
+               if(pistolCurrentAmmo > pistolMaxAmmo)
+               {
+                  pistolCurrentAmmo = pistolMagSize;
+               }
+            }
+
+
     //spawn the trail
     private IEnumerator SpawnPistolBulletTrail(TrailRenderer Trail, Vector3 _hitPoint, Vector3 _hitNormal, bool MadeImpact)
     {
@@ -213,7 +271,7 @@ public class WeaponManager : NetworkBehaviour
             Quaternion quatID = Quaternion.identity;
             RaycastHit _hit;
 
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit))
+            if (Physics.Raycast(shootingCam.transform.position, shootingCam.transform.forward, out _hit))
             {
                 targetHit = _hit.collider.gameObject.name;
             }
@@ -251,8 +309,8 @@ public class WeaponManager : NetworkBehaviour
         if (transform.name == playerName)
         {
             RaycastHit _hit;
-            Vector3 direction = cam.transform.forward;
-            Physics.Raycast(cam.transform.position, direction, out _hit);
+            Vector3 direction = shootingCam.transform.forward;
+            Physics.Raycast(shootingCam.transform.position, direction, out _hit);
 
             if (!isFiring && rifleCurrentClip >= 1 && !player.isDead)
             {
@@ -274,7 +332,7 @@ public class WeaponManager : NetworkBehaviour
                 {
                     Debug.Log("We have shot nothing.");
                     TrailRenderer trail = Instantiate(rifleBulletTrail, rifleBulletSpawnPoint.position, quatID);
-                    StartCoroutine(SpawnRifleBulletTrail(trail, cam.transform.forward * 100, Vector3.zero, false));
+                    StartCoroutine(SpawnRifleBulletTrail(trail, shootingCam.transform.forward * 100f, Vector3.zero, false));
                 }
 
                 //muzzleFlash.SetActive(true);
@@ -311,6 +369,54 @@ public class WeaponManager : NetworkBehaviour
         }
     }
 
+    public void RifleReload()
+        {
+            string _player = gameObject.name;
+            CmdPlayerReloadingRifle(_player);
+        }
+
+        [Command(requiresAuthority = false)]
+        public void CmdPlayerReloadingRifle(string _player)
+        {
+              RpcPlayerReloadingRifle(_player);
+        }
+
+        [ClientRpc]
+        public void RpcPlayerReloadingRifle(string _player)
+         {
+            if(gameObject.name == _player)
+            
+               if (!isReloadingRifle)
+               {
+                StartCoroutine(Reload());
+               }
+                IEnumerator Reload()
+               {
+                isReloadingRifle = true;
+                //animator.Play("Reload");
+                audioScript.rifleReload.Play();
+                yield return new WaitForSeconds (rifleReloadSpeed);
+                audioScript.rifleReload.Stop();
+                //animator.Play("IdlePistol");
+                int reloadAmount = rifleMagSize - rifleCurrentClip;
+                reloadAmount = (rifleCurrentAmmo - reloadAmount) >= 0 ? reloadAmount : rifleCurrentAmmo;
+                rifleCurrentClip += reloadAmount;
+                rifleCurrentAmmo -= reloadAmount;
+                manageUI.UpdateAmmoUI();
+                needReloadRifle = false;
+                isReloadingRifle = false;
+               }
+            }
+
+            public void AddAmmoRifle(int ammoAmount)
+            {
+               rifleCurrentAmmo += ammoAmount;
+               if(rifleCurrentAmmo > rifleMaxAmmo)
+               {
+                  rifleCurrentAmmo = rifleMagSize;
+               }
+            }
+
     #endregion
 
     #region Heavy
@@ -324,7 +430,7 @@ public class WeaponManager : NetworkBehaviour
             Quaternion quatID = Quaternion.identity;
             RaycastHit _hit;
 
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit))
+            if (Physics.Raycast(shootingCam.transform.position, shootingCam.transform.forward, out _hit))
             {
                 targetHit = _hit.collider.gameObject.name;
             }
@@ -363,8 +469,8 @@ public class WeaponManager : NetworkBehaviour
         if (transform.name == playerName)
         {
             RaycastHit _hit;
-            Vector3 direction = cam.transform.forward;
-            Physics.Raycast(cam.transform.position, direction, out _hit);
+            Vector3 direction = shootingCam.transform.forward;
+            Physics.Raycast(shootingCam.transform.position, direction, out _hit);
 
             if (!isFiring && pistolCurrentClip >= 1 && !player.isDead)
             {
@@ -385,7 +491,7 @@ public class WeaponManager : NetworkBehaviour
                 {
                     Debug.Log("We have shot nothing.");
                     TrailRenderer trail = Instantiate(pistolBulletTrail, heavyBulletSpawnPoint.position, quatID);
-                    StartCoroutine(SpawnHeavyBulletTrail(trail, cam.transform.forward * 100, Vector3.zero, false));
+                    StartCoroutine(SpawnHeavyBulletTrail(trail, shootingCam.transform.forward * 100f, Vector3.zero, false));
                 }
 
                 //muzzleFlash.SetActive(true);
@@ -422,6 +528,54 @@ public class WeaponManager : NetworkBehaviour
             yield return null;
         }
     }
+
+    public void HeavyReload()
+        {
+            string _player = gameObject.name;
+            CmdPlayerReloadingHeavy(_player);
+        }
+
+        [Command(requiresAuthority = false)]
+        public void CmdPlayerReloadingHeavy(string _player)
+        {
+              RpcPlayerReloadingHeavy(_player);
+        }
+
+        [ClientRpc]
+        public void RpcPlayerReloadingHeavy(string _player)
+         {
+            if(gameObject.name == _player)
+            
+               if (!isReloadingRifle)
+               {
+                StartCoroutine(Reload());
+               }
+                IEnumerator Reload()
+               {
+                isReloadingHeavy = true;
+                //animator.Play("Reload");
+                audioScript.heavyReload.Play();
+                yield return new WaitForSeconds (heavyReloadSpeed);
+                audioScript.heavyReload.Stop();
+                //animator.Play("IdlePistol");
+                int reloadAmount = heavyMagSize - heavyCurrentClip;
+                reloadAmount = (heavyCurrentAmmo - reloadAmount) >= 0 ? reloadAmount : heavyCurrentAmmo;
+                heavyCurrentClip += reloadAmount;
+                heavyCurrentAmmo -= reloadAmount;
+                manageUI.UpdateAmmoUI();
+                needReloadHeavy = false;
+                isReloadingHeavy = false;
+               }
+            }
+
+            public void AddAmmoHeavy(int ammoAmount)
+            {
+               heavyCurrentAmmo += ammoAmount;
+               if(heavyCurrentAmmo > heavyMaxAmmo)
+               {
+                  heavyCurrentAmmo = heavyMagSize;
+               }
+            }
 
     #endregion
 

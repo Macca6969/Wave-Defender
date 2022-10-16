@@ -15,7 +15,6 @@ public class PlayerHealth : NetworkBehaviour
     public int chipSpeed = 1;
     public Image frontHealthBar;
     public Image backHealthBar;
-    private int playerLevel;
 
 
     [Header("Scripts")]
@@ -83,12 +82,17 @@ public class PlayerHealth : NetworkBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (isLocalPlayer)
+        {
         player.playerCurrentHealth -= damage;
         lerpTimer =0f;
+        }
     }
 
     public void RestoreHealth(int healAmount)
     {
+        if (isLocalPlayer)
+        {
         if (player.playerCurrentHealth == player.playerMaxHealth)
         {
             return;
@@ -97,6 +101,7 @@ public class PlayerHealth : NetworkBehaviour
         player.playerCurrentHealth += healAmount;
         lerpTimer = 0f;
         audioScript.playerHealed.Play();
+        }
 
     }
 

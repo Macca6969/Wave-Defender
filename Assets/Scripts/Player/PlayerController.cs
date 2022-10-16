@@ -202,8 +202,20 @@ public class PlayerController : NetworkBehaviour
 
     public void PlayerReload(InputAction.CallbackContext context)
     {
-        //pistol.PistolReload();
-        Debug.Log("reload 1");
+        if (selectedWeapon == 0)
+        {
+            weaponManager.PistolReload();
+        }
+
+        if (selectedWeapon == 1)
+        {
+            weaponManager.RifleReload();
+        }
+
+        if (selectedWeapon == 2)
+        {
+            weaponManager.HeavyReload();
+        }
     }
 
 

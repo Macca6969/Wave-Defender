@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     #region Player Tracking
 
   private const string PLAYER_ID_PREFIX = "Player ";
-  private static Dictionary<string, Player> players = new Dictionary<string, Player>();
+  public static Dictionary<string, Player> players = new Dictionary<string, Player>();
 
   public static void RegisterPlayer (string _netID, Player _player)
   {
@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     return players[_playerID];
   }
 
-  private void OnGUI()
+  /*private void OnGUI()
    {
       GUILayout.BeginArea(new Rect(200, 200, 200, 500));
       GUILayout.BeginVertical();
@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
       GUILayout.EndVertical();
       GUILayout.EndArea();
    }
+   */
    
    #endregion
 

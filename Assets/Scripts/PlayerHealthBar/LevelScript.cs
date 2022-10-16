@@ -44,15 +44,17 @@ public class LevelScript : NetworkBehaviour
     void Update()
     {
         UpdateXpUI();
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.M) && isLocalPlayer)
         {
             GainExperienceFlatRate(20);
         }
+         
 
-        if (player.currentXp > player.requiredXp)
+        if (player.currentXp > player.requiredXp && isLocalPlayer)
         {
             LevelUp();
         }
+        
     }
 
     public void UpdateXpUI()
