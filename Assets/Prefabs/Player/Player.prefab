@@ -4504,6 +4504,8 @@ GameObject:
   - component: {fileID: 9073281325595253203}
   - component: {fileID: 306396828775223357}
   - component: {fileID: 2214731938350634821}
+  - component: {fileID: 210026187490384787}
+  - component: {fileID: 3324749749790035701}
   m_Layer: 28
   m_Name: Player
   m_TagString: Player
@@ -4827,8 +4829,8 @@ MonoBehaviour:
   playerMaxHealth: 100
   playerCurrentHealth: 0
   playerCurrentLevel: 0
-  currentXp: 0
-  requiredXp: 0
+  playerCurrentXp: 0
+  playerRequiredXp: 0
   selectedWeapon: 0
 --- !u!114 &1728477862463476053
 MonoBehaviour:
@@ -5127,34 +5129,10 @@ MonoBehaviour:
   audioScript: {fileID: 9157537801358787536}
   manageUI: {fileID: 6978906506857733367}
   pistol: {fileID: 2214731938350634821}
+  rifle: {fileID: 210026187490384787}
+  heavy: {fileID: 3324749749790035701}
   cam: {fileID: 1846837832154303542}
   shootingCam: {fileID: 6583161080543204150}
-  rifleFireRate: 0.02
-  rifleBulletSpeed: 200
-  rifleDamage: 2
-  rifleMagSize: 90
-  rifleCurrentAmmo: 500
-  rifleCurrentClip: 130
-  rifleMaxAmmo: 500
-  rifleReloadSpeed: 1.6
-  isReloadingRifle: 0
-  needReloadRifle: 0
-  rifleBulletSpawnPoint: {fileID: 7979384709641037597}
-  rifleBulletTrail: {fileID: -4461844327463083629, guid: 305ea5c00b313244fb3e211d09cef798, type: 3}
-  rifleMuzzleFlash: {fileID: 1845763866525287423}
-  heavyFireRate: 1
-  heavyBulletSpeed: 30
-  heavyDamage: 35
-  heavyMagSize: 12
-  heavyCurrentAmmo: 78
-  heavyCurrentClip: 12
-  heavyMaxAmmo: 78
-  heavyReloadSpeed: 2.5
-  isReloadingHeavy: 0
-  needReloadHeavy: 0
-  heavyBulletSpawnPoint: {fileID: 7418351826526086012}
-  heavyBulletTrail: {fileID: -130222676552222968, guid: 012351e59308ced489bb4e25563de594, type: 3}
-  heavyMuzzleFlash: {fileID: 4460110101461101371}
   isFiring: 0
 --- !u!114 &2214731938350634821
 MonoBehaviour:
@@ -5173,18 +5151,74 @@ MonoBehaviour:
   weaponManager: {fileID: 306396828775223357}
   audioScript: {fileID: 9157537801358787536}
   pistolFireRate: 0.4
-  pistolBulletSpeed: 100
-  pistolDamage: 10
+  pistolBulletSpeed: 300
+  pistolDamage: 16
   pistolMagSize: 7
   pistolCurrentAmmo: 45
   pistolCurrentClip: 7
   pistolMaxAmmo: 50
   pistolReloadSpeed: 0.8
   isReloadingPistol: 0
-  needReloadPistol: 0
   pistolBulletSpawnPoint: {fileID: 3287217049401836182}
   pistolMuzzleFlash: {fileID: 4047757798600938356}
   pistolBulletTrail: {fileID: -6951808740216008255, guid: b4bc96b0a30aca648a1f9c07851f46d9, type: 3}
+--- !u!114 &210026187490384787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9098161790655698285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e96b02dacfa92d419a90313f8e3f1d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  weaponManager: {fileID: 306396828775223357}
+  audioScript: {fileID: 9157537801358787536}
+  rifleFireRate: 0.02
+  rifleBulletSpeed: 350
+  rifleDamage: 4
+  rifleMagSize: 90
+  rifleCurrentAmmo: 720
+  rifleCurrentClip: 90
+  rifleMaxAmmo: 720
+  rifleReloadSpeed: 1.2
+  isReloadingRifle: 0
+  rifleBulletSpawnPoint: {fileID: 7979384709641037597}
+  rifleMuzzleFlash: {fileID: 1845763866525287423}
+  rifleBulletTrail: {fileID: -4461844327463083629, guid: 305ea5c00b313244fb3e211d09cef798, type: 3}
+--- !u!114 &3324749749790035701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9098161790655698285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb59eaa0128b733458da72d776fb9cbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  weaponManager: {fileID: 306396828775223357}
+  audioScript: {fileID: 9157537801358787536}
+  heavyFireRate: 5
+  heavyBulletSpeed: 100
+  heavyDamage: 120
+  heavyMagSize: 6
+  heavyCurrentAmmo: 70
+  heavyCurrentClip: 6
+  heavyMaxAmmo: 70
+  heavyReloadSpeed: 2.8
+  isReloadingHeavy: 0
+  needReloadHeavy: 0
+  heavyBulletSpawnPoint: {fileID: 7418351826526086012}
+  heavyBulletTrail: {fileID: -130222676552222968, guid: 012351e59308ced489bb4e25563de594, type: 3}
+  heavyMuzzleFlash: {fileID: 4460110101461101371}
 --- !u!1 &9098161791012660199
 GameObject:
   m_ObjectHideFlags: 0

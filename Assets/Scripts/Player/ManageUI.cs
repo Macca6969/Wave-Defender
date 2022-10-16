@@ -84,11 +84,11 @@ public class ManageUI : NetworkBehaviour
         }
         if (playerController.selectedWeapon == 1)
         {
-            ammoTextUI.GetComponent<TMP_Text>().text = weaponManager.rifleCurrentClip + "/" + weaponManager.rifleCurrentAmmo;
+            ammoTextUI.GetComponent<TMP_Text>().text = weaponManager.rifle.rifleCurrentClip + "/" + weaponManager.rifle.rifleCurrentAmmo;
         }
         if (playerController.selectedWeapon == 2)
         {
-            ammoTextUI.GetComponent<TMP_Text>().text = weaponManager.heavyCurrentClip + "/" + weaponManager.heavyCurrentAmmo;
+            ammoTextUI.GetComponent<TMP_Text>().text = weaponManager.heavy.heavyCurrentClip + "/" + weaponManager.heavy.heavyCurrentAmmo;
         }
     }
 

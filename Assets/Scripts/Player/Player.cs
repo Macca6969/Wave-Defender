@@ -38,8 +38,8 @@ public class Player : NetworkBehaviour
   [SyncVar] public int playerMaxHealth;
   [SyncVar] public int playerCurrentHealth;
   [SyncVar] public int playerCurrentLevel;
-  [SyncVar] public float currentXp;
-  [SyncVar] public float requiredXp;
+  [SyncVar] public float playerCurrentXp;   //make hook var
+  [SyncVar] public float playerRequiredXp;
 
   [SyncVar] private bool _isDead = false;
   public bool isDead 

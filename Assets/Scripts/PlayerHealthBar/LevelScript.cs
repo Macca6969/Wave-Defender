@@ -34,9 +34,9 @@ public class LevelScript : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        frontXpBar.fillAmount = player.currentXp / player.requiredXp;
-        backXpBar.fillAmount = player.currentXp / player.requiredXp;
-        player.requiredXp = CalculateRequiredXp();
+        frontXpBar.fillAmount = player.playerCurrentXp / player.playerRequiredXp;
+        backXpBar.fillAmount = player.playerCurrentXp / player.playerRequiredXp;
+        player.playerRequiredXp = CalculateplayerRequiredXp();
         levelText.text = player.playerCurrentLevel.ToString();
     }
 
@@ -46,23 +46,39 @@ public class LevelScript : NetworkBehaviour
         UpdateXpUI();
         if (Input.GetKeyDown(KeyCode.M) && isLocalPlayer)
         {
-            GainExperienceFlatRate(20);
+            GainExperienceScalable(20, player.playerCurrentLevel);
         }
-         
 
-        if (player.currentXp > player.requiredXp && isLocalPlayer)
+
+        if (player.playerCurrentXp > player.playerRequiredXp && isLocalPlayer)
         {
             LevelUp();
         }
-        
+
+    }
+
+    [ClientRpc]
+    public void RpcPlayerGainExperience(int enemyXp, string playerName)
+    {
+        player.playerCurrentXp += enemyXp;
+        Debug.Log(gameObject.name + " has gained " + enemyXp + " xp.");
+
+        if (gameObject.name == playerName)
+        {
+            int bonusXp = (enemyXp / 10);
+            player.playerCurrentXp += bonusXp;
+            Debug.Log(gameObject.name + " has recieved the bonus xp.");
+
+        }
+
     }
 
     public void UpdateXpUI()
     {
-        float xpFraction = player.currentXp / player.requiredXp;
+        float xpFraction = player.playerCurrentXp / player.playerRequiredXp;
         float FXP = frontXpBar.fillAmount;
 
-        if(FXP < xpFraction)
+        if (FXP < xpFraction)
         {
             delayTimer += Time.deltaTime;
             backXpBar.fillAmount = xpFraction;
@@ -73,43 +89,43 @@ public class LevelScript : NetworkBehaviour
                 frontXpBar.fillAmount = Mathf.Lerp(FXP, backXpBar.fillAmount, percentComplete);
             }
         }
-        xpText.text = player.currentXp + "/" + player.requiredXp;
+        xpText.text = player.playerCurrentXp + "/" + player.playerRequiredXp;
     }
 
     public void GainExperienceFlatRate(float xpGained)
     {
-        player.currentXp += xpGained;
+        player.playerCurrentXp += xpGained;
         lerpTimer = 0f;
     }
 
     public void LevelUp()
     {
-         CmdLevelUp();
-         frontXpBar.fillAmount = 0f;
-         backXpBar.fillAmount = 0f;
-         player.currentXp = Mathf.RoundToInt(player.currentXp - player.requiredXp);
-         //alter attributes here
-         GetComponent<PlayerHealth>().IncreaseHealth(player.playerCurrentLevel);
-         player.requiredXp = CalculateRequiredXp();
-         levelText.text = player.playerCurrentLevel.ToString();
-         audioScript.playerLevelUp.Play();
+        CmdLevelUp();
+        frontXpBar.fillAmount = 0f;
+        backXpBar.fillAmount = 0f;
+        player.playerCurrentXp = Mathf.RoundToInt(player.playerCurrentXp - player.playerRequiredXp);
+        //alter attributes here
+        GetComponent<PlayerHealth>().IncreaseHealth(player.playerCurrentLevel);
+        player.playerRequiredXp = CalculateplayerRequiredXp();
+        levelText.text = player.playerCurrentLevel.ToString();
+        audioScript.playerLevelUp.Play();
     }
 
-     [Command(requiresAuthority = false)]
+    [Command(requiresAuthority = false)]
     public void CmdLevelUp()
     {
         player.playerCurrentLevel++;
 
     }
 
-    private int CalculateRequiredXp()
+    private int CalculateplayerRequiredXp()
     {
-        int solveForRequiredXp = 0;
+        int solveForplayerRequiredXp = 0;
         for (int levelCycle = 1; levelCycle <= player.playerCurrentLevel; levelCycle++)
         {
-              solveForRequiredXp += (int)Mathf.Floor(levelCycle + additionMultiplier * Mathf.Pow(powerMultiplier, levelCycle / divisionMultiplier));
+            solveForplayerRequiredXp += (int)Mathf.Floor(levelCycle + additionMultiplier * Mathf.Pow(powerMultiplier, levelCycle / divisionMultiplier));
         }
-        return solveForRequiredXp / 4;
+        return solveForplayerRequiredXp / 4;
     }
 
     public void GainExperienceScalable(float xpGained, int passedLevel)
@@ -117,11 +133,11 @@ public class LevelScript : NetworkBehaviour
         if (passedLevel < player.playerCurrentLevel)
         {
             float multiplier = 1 + (player.playerCurrentLevel - passedLevel) * 0.1f;
-            player.currentXp += xpGained * multiplier; 
+            player.playerCurrentXp += xpGained * multiplier;
         }
         else
         {
-            player.currentXp += xpGained;
+            player.playerCurrentXp += xpGained;
         }
         lerpTimer = 0f;
         delayTimer = 0f;

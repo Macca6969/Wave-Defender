@@ -8,6 +8,7 @@ TagManager:
   - PlayerPistol
   - PlayerHeavy
   - PistolBullet
+  - Enemy
   layers:
   - Default
   - TransparentFX

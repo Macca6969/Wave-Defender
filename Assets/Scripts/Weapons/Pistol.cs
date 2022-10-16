@@ -19,12 +19,11 @@ public class Pistol : NetworkBehaviour
     public int pistolMaxAmmo = 50;
     public float pistolReloadSpeed = 0.8f;
     public bool isReloadingPistol = false;
-    public bool needReloadPistol = false;
     [SerializeField] private Transform pistolBulletSpawnPoint;
     [SerializeField] private GameObject pistolMuzzleFlash;
     [SerializeField] private TrailRenderer pistolBulletTrail;
 
-    public void FiringPistol(bool playerShooting)
+ public void FiringPistol(bool playerShooting)
     {
         if (playerShooting)
         {
@@ -49,7 +48,7 @@ public class Pistol : NetworkBehaviour
             }
 
 
-            CmdFiringPistol(playerName, targetHit, quatID);
+            CmdFiringPistol(playerName, targetHit, quatID, _hit.collider.gameObject);
         }
         if (!playerShooting)
         {
@@ -58,16 +57,14 @@ public class Pistol : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    public void CmdFiringPistol(string playerName, string targetHit, Quaternion quatID)
+    public void CmdFiringPistol(string playerName, string targetHit, Quaternion quatID, GameObject objectHit)
     {
-        Debug.Log(playerName + " has shot " + targetHit + " with the pistol");
-        RpcPistolFire(playerName, targetHit, quatID);
+        RpcPistolFire(playerName, targetHit, quatID, objectHit);
     }
 
     [ClientRpc]
-    public void RpcPistolFire(string playerName, string targetHit, Quaternion quatID)
+    public void RpcPistolFire(string playerName, string targetHit, Quaternion quatID, GameObject objectHit)
     {
-        //checks if this is the player that shot
         // [ClientRpc(includeOwner = false)]  can be used to send to everyone except the owner. redo shooting method to client + clientRpc
         if (transform.name == playerName)
         {
@@ -90,23 +87,32 @@ public class Pistol : NetworkBehaviour
                     TrailRenderer trail = Instantiate(pistolBulletTrail, pistolBulletSpawnPoint.position, quatID);
                     StartCoroutine(SpawnPistolBulletTrail(trail, _hit.point, _hit.normal, true));
                 }
-                else
+                if (targetHit == "No Target")
                 {
                     Debug.Log("We have shot nothing.");
                     TrailRenderer trail = Instantiate(pistolBulletTrail, pistolBulletSpawnPoint.position, quatID);
                     StartCoroutine(SpawnPistolBulletTrail(trail, weaponManager.shootingCam.transform.forward * 100f, Vector3.zero, false));
                 }
 
+                //ATTACK ENEMY
+                if (_hit.transform.tag == "Enemy")
+                {
+                    if (objectHit.TryGetComponent<Enemy>(out Enemy enemyComponent))
+                    {
+                        enemyComponent.TakeDamage(pistolDamage, playerName);
+                    }
+                    
+                  
+                }
+
                 //muzzleFlash.SetActive(true);
                 yield return new WaitForSeconds(0.05f);
                 //muzzleFlash.SetActive(false);
-                yield return new WaitForSeconds(0.05f);
                 //animator.Play("IdlePistol");
                 pistolCurrentClip = pistolCurrentClip - 1;
                 weaponManager.manageUI.UpdateAmmoUI();
                 yield return new WaitForSeconds(pistolFireRate);
                 weaponManager.isFiring = false;
-                weaponManager.playerController.playerShooting = false;
 
                 FiringPistol(weaponManager.playerController.playerShooting);
             }
@@ -117,57 +123,6 @@ public class Pistol : NetworkBehaviour
             }
         }
     }
-
-    public void PistolReload()
-    {
-        string _player = gameObject.name;
-        CmdPlayerReloadingPistol(_player);
-    }
-
-    [Command(requiresAuthority = false)]
-    public void CmdPlayerReloadingPistol(string _player)
-    {
-        RpcPlayerReloadingPistol(_player);
-    }
-
-    [ClientRpc]
-    public void RpcPlayerReloadingPistol(string _player)
-    {
-        if (gameObject.name == _player)
-
-            if (!isReloadingPistol)
-            {
-                StartCoroutine(Reload());
-            }
-        IEnumerator Reload()
-        {
-            Debug.Log(_player + " is reloading");
-            isReloadingPistol = true;
-            //animator.Play("Reload");
-            audioScript.pistolReload.Play();
-            yield return new WaitForSeconds(pistolReloadSpeed);
-            audioScript.pistolReload.Stop();
-            //animator.Play("IdlePistol");
-            int reloadAmount = pistolMagSize - pistolCurrentClip;
-            reloadAmount = (pistolCurrentAmmo - reloadAmount) >= 0 ? reloadAmount : pistolCurrentAmmo;
-            pistolCurrentClip += reloadAmount;
-            pistolCurrentAmmo -= reloadAmount;
-            weaponManager.manageUI.UpdateAmmoUI();
-            needReloadPistol = false;
-            isReloadingPistol = false;
-        }
-    }
-
-    public void AddAmmoPistol(int ammoAmount)
-    {
-        pistolCurrentAmmo += ammoAmount;
-        if (pistolCurrentAmmo > pistolMaxAmmo)
-        {
-            pistolCurrentAmmo = pistolMagSize;
-        }
-    }
-
-
     //spawn the trail
     private IEnumerator SpawnPistolBulletTrail(TrailRenderer Trail, Vector3 _hitPoint, Vector3 _hitNormal, bool MadeImpact)
     {
@@ -184,5 +139,53 @@ public class Pistol : NetworkBehaviour
         }
     }
 
+    public void PistolReload()
+        {
+            string _player = gameObject.name;
+            CmdPlayerReloadingPistol(_player);
+        }
+
+        [Command(requiresAuthority = false)]
+        public void CmdPlayerReloadingPistol(string _player)
+        {
+              RpcPlayerReloadingPistol(_player);
+        }
+
+        [ClientRpc]
+        public void RpcPlayerReloadingPistol(string _player)
+         {
+            if(gameObject.name == _player)
+            
+               if (!isReloadingPistol)
+               {
+                StartCoroutine(Reload());
+               }
+                IEnumerator Reload()
+               {
+                isReloadingPistol = true;
+                //animator.Play("Reload");
+                audioScript.pistolReload.Play();
+                yield return new WaitForSeconds (pistolReloadSpeed);
+                audioScript.pistolReload.Stop();
+                //animator.Play("IdlePistol");
+                int reloadAmount = pistolMagSize - pistolCurrentClip;
+                reloadAmount = (pistolCurrentAmmo - reloadAmount) >= 0 ? reloadAmount : pistolCurrentAmmo;
+                pistolCurrentClip += reloadAmount;
+                pistolCurrentAmmo -= reloadAmount;
+                weaponManager.manageUI.UpdateAmmoUI();
+                isReloadingPistol = false;
+               }
+            }
+
+            public void AddAmmoPistol(int ammoAmount)
+            {
+               pistolCurrentAmmo += ammoAmount;
+               if(pistolCurrentAmmo > pistolMaxAmmo)
+               {
+                  pistolCurrentAmmo = pistolMagSize;
+               }
+            }
+
+           
 
 }
