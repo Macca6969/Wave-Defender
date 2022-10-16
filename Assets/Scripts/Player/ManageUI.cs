@@ -80,7 +80,7 @@ public class ManageUI : NetworkBehaviour
     {
         if (playerController.selectedWeapon == 0)
         {
-            ammoTextUI.GetComponent<TMP_Text>().text = weaponManager.pistolCurrentClip + "/" + weaponManager.pistolCurrentAmmo;
+            ammoTextUI.GetComponent<TMP_Text>().text = weaponManager.pistol.pistolCurrentClip + "/" + weaponManager.pistol.pistolCurrentAmmo;
         }
         if (playerController.selectedWeapon == 1)
         {

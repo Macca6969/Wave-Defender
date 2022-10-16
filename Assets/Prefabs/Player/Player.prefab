@@ -4503,6 +4503,7 @@ GameObject:
   - component: {fileID: 5441220378068944583}
   - component: {fileID: 9073281325595253203}
   - component: {fileID: 306396828775223357}
+  - component: {fileID: 2214731938350634821}
   m_Layer: 28
   m_Name: Player
   m_TagString: Player
@@ -5125,21 +5126,9 @@ MonoBehaviour:
   playerController: {fileID: 2856307772835922044}
   audioScript: {fileID: 9157537801358787536}
   manageUI: {fileID: 6978906506857733367}
+  pistol: {fileID: 2214731938350634821}
   cam: {fileID: 1846837832154303542}
   shootingCam: {fileID: 6583161080543204150}
-  pistolFireRate: 0.1
-  pistolBulletSpeed: 100
-  pistolDamage: 10
-  pistolMagSize: 30
-  pistolCurrentAmmo: 170
-  pistolCurrentClip: 30
-  pistolMaxAmmo: 170
-  pistolReloadSpeed: 0.8
-  isReloadingPistol: 0
-  needReloadPistol: 0
-  pistolBulletSpawnPoint: {fileID: 3287217049401836182}
-  pistolMuzzleFlash: {fileID: 4047757798600938356}
-  pistolBulletTrail: {fileID: -6951808740216008255, guid: b4bc96b0a30aca648a1f9c07851f46d9, type: 3}
   rifleFireRate: 0.02
   rifleBulletSpeed: 200
   rifleDamage: 2
@@ -5166,6 +5155,36 @@ MonoBehaviour:
   heavyBulletSpawnPoint: {fileID: 7418351826526086012}
   heavyBulletTrail: {fileID: -130222676552222968, guid: 012351e59308ced489bb4e25563de594, type: 3}
   heavyMuzzleFlash: {fileID: 4460110101461101371}
+  isFiring: 0
+--- !u!114 &2214731938350634821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9098161790655698285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e4b5b91ce3c61148b5286b03edf4879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  weaponManager: {fileID: 306396828775223357}
+  audioScript: {fileID: 9157537801358787536}
+  pistolFireRate: 0.4
+  pistolBulletSpeed: 100
+  pistolDamage: 10
+  pistolMagSize: 7
+  pistolCurrentAmmo: 45
+  pistolCurrentClip: 7
+  pistolMaxAmmo: 50
+  pistolReloadSpeed: 0.8
+  isReloadingPistol: 0
+  needReloadPistol: 0
+  pistolBulletSpawnPoint: {fileID: 3287217049401836182}
+  pistolMuzzleFlash: {fileID: 4047757798600938356}
+  pistolBulletTrail: {fileID: -6951808740216008255, guid: b4bc96b0a30aca648a1f9c07851f46d9, type: 3}
 --- !u!1 &9098161791012660199
 GameObject:
   m_ObjectHideFlags: 0

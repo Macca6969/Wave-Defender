@@ -13,26 +13,14 @@ public class WeaponManager : NetworkBehaviour
     public PlayerController playerController;
     public AudioScript audioScript;
     public ManageUI manageUI;
+    public Pistol pistol;
 
 
     [Header("Objects")]
     public Camera cam;
     public Camera shootingCam;
 
-    [Header("Pistol Settings")]
-    public float pistolFireRate = 0.4f;
-    public int pistolBulletSpeed = 100;
-    public int pistolDamage = 10;
-    public int pistolMagSize = 7;
-    public int pistolCurrentAmmo = 45;
-    public int pistolCurrentClip = 7;
-    public int pistolMaxAmmo = 50;
-    public float pistolReloadSpeed = 0.8f;
-    public bool isReloadingPistol = false;
-    public bool needReloadPistol = false;
-    [SerializeField] private Transform pistolBulletSpawnPoint;
-    [SerializeField] private GameObject pistolMuzzleFlash;
-    [SerializeField] private TrailRenderer pistolBulletTrail;
+    
 
     [Header("Rifle Settings")]
     public float rifleFireRate = 0.05f;
@@ -65,7 +53,7 @@ public class WeaponManager : NetworkBehaviour
     [SerializeField] private GameObject heavyMuzzleFlash;
 
 
-    private bool isFiring;
+    public bool isFiring;
 
 
 
@@ -81,7 +69,7 @@ public class WeaponManager : NetworkBehaviour
     {
         if (selectedWeapon == 0)
         {
-            FiringPistol(playerShooting);
+            pistol.FiringPistol(playerShooting);
         }
 
         if (selectedWeapon == 1)
@@ -96,169 +84,6 @@ public class WeaponManager : NetworkBehaviour
 
     }
 
-    #region Pistol 
-
-    public void FiringPistol(bool playerShooting)
-    {
-        if (playerShooting)
-        {
-            string targetHit;
-            string playerName = gameObject.name;
-            Quaternion quatID = Quaternion.identity;
-            RaycastHit _hit;
-
-            if (Physics.Raycast(shootingCam.transform.position, shootingCam.transform.forward, out _hit))
-            {
-                targetHit = _hit.collider.gameObject.name;
-            }
-            else
-            {
-                targetHit = "No Target";
-            }
-
-            if (targetHit == "Player")
-            {
-                targetHit = _hit.collider.gameObject.name;
-                GameManager.GetPlayer(targetHit);
-            }
-
-
-            CmdFiringPistol(playerName, targetHit, quatID);
-        }
-        if (!playerShooting)
-        {
-            Debug.Log("The player has stopped shooting.");
-        }
-    }
-
-    [Command(requiresAuthority = false)]
-    public void CmdFiringPistol(string playerName, string targetHit, Quaternion quatID)
-    {
-        Debug.Log(playerName + " has shot " + targetHit + " with the pistol");
-        RpcPistolFire(playerName, targetHit, quatID);
-    }
-
-    [ClientRpc]
-    public void RpcPistolFire(string playerName, string targetHit, Quaternion quatID)
-    {
-        //checks if this is the player that shot
-        // [ClientRpc(includeOwner = false)]  can be used to send to everyone except the owner. redo shooting method to client + clientRpc
-        if (transform.name == playerName)
-        {
-            RaycastHit _hit;
-            Vector3 direction = shootingCam.transform.forward;
-            Physics.Raycast(shootingCam.transform.position, direction, out _hit);
-
-            if (!isFiring && pistolCurrentClip >= 1 && !player.isDead)
-            {
-                StartCoroutine(FirePistol());
-            }
-            IEnumerator FirePistol()
-            {
-                isFiring = true;
-                //animator.Play("FirePistol");
-                audioScript.pistolShoot.Play();
-
-                if (targetHit != "No Target")
-                {
-                    TrailRenderer trail = Instantiate(pistolBulletTrail, pistolBulletSpawnPoint.position, quatID);
-                    StartCoroutine(SpawnPistolBulletTrail(trail, _hit.point, _hit.normal, true));
-                }
-                else
-                {
-                    Debug.Log("We have shot nothing.");
-                    TrailRenderer trail = Instantiate(pistolBulletTrail, pistolBulletSpawnPoint.position, quatID);
-                    StartCoroutine(SpawnPistolBulletTrail(trail, shootingCam.transform.forward * 100f, Vector3.zero, false));
-                }
-
-                //muzzleFlash.SetActive(true);
-                yield return new WaitForSeconds(0.05f);
-                //muzzleFlash.SetActive(false);
-                yield return new WaitForSeconds(0.05f);
-                //animator.Play("IdlePistol");
-                pistolCurrentClip = pistolCurrentClip - 1;
-                manageUI.UpdateAmmoUI();
-                yield return new WaitForSeconds(pistolFireRate);
-                isFiring = false;
-                playerController.playerShooting = false;
-
-                FiringPistol(playerController.playerShooting);
-            }
-
-            if (!isFiring && pistolCurrentClip >= 0 && !player.isDead)
-            {
-                audioScript.pistolEmpty.Play();
-            }
-        }
-    }
-
-    public void PistolReload()
-        {
-            string _player = gameObject.name;
-            CmdPlayerReloadingPistol(_player);
-        }
-
-        [Command(requiresAuthority = false)]
-        public void CmdPlayerReloadingPistol(string _player)
-        {
-              RpcPlayerReloadingPistol(_player);
-        }
-
-        [ClientRpc]
-        public void RpcPlayerReloadingPistol(string _player)
-         {
-            if(gameObject.name == _player)
-            
-               if (!isReloadingPistol)
-               {
-                StartCoroutine(Reload());
-               }
-                IEnumerator Reload()
-               {
-                Debug.Log (_player + " is reloading");
-                isReloadingPistol = true;
-                //animator.Play("Reload");
-                audioScript.pistolReload.Play();
-                yield return new WaitForSeconds (pistolReloadSpeed);
-                audioScript.pistolReload.Stop();
-                //animator.Play("IdlePistol");
-                int reloadAmount = pistolMagSize - pistolCurrentClip;
-                reloadAmount = (pistolCurrentAmmo - reloadAmount) >= 0 ? reloadAmount : pistolCurrentAmmo;
-                pistolCurrentClip += reloadAmount;
-                pistolCurrentAmmo -= reloadAmount;
-                manageUI.UpdateAmmoUI();
-                needReloadPistol = false;
-                isReloadingPistol = false;
-               }
-            }
-
-            public void AddAmmoPistol(int ammoAmount)
-            {
-               pistolCurrentAmmo += ammoAmount;
-               if(pistolCurrentAmmo > pistolMaxAmmo)
-               {
-                  pistolCurrentAmmo = pistolMagSize;
-               }
-            }
-
-
-    //spawn the trail
-    private IEnumerator SpawnPistolBulletTrail(TrailRenderer Trail, Vector3 _hitPoint, Vector3 _hitNormal, bool MadeImpact)
-    {
-        Vector3 startPosition = Trail.transform.position;
-        float distance = Vector3.Distance(Trail.transform.position, _hitPoint);
-        float remainingDistance = distance;
-
-        while (remainingDistance > 0)
-        {
-            Trail.transform.position = Vector3.Lerp(startPosition, _hitPoint, 1 - (remainingDistance / distance));
-            remainingDistance -= pistolBulletSpeed * Time.deltaTime;
-
-            yield return null;
-        }
-    }
-
-    #endregion
 
     #region Rifle
 
@@ -347,7 +172,7 @@ public class WeaponManager : NetworkBehaviour
                 FiringRifle(playerController.playerShooting);
             }
 
-            if (!isFiring && pistolCurrentClip >= 0 && !player.isDead)
+            if (!isFiring && rifleCurrentClip >= 0 && !player.isDead)
             {
                 audioScript.rifleEmpty.Play();
             }
@@ -472,7 +297,7 @@ public class WeaponManager : NetworkBehaviour
             Vector3 direction = shootingCam.transform.forward;
             Physics.Raycast(shootingCam.transform.position, direction, out _hit);
 
-            if (!isFiring && pistolCurrentClip >= 1 && !player.isDead)
+            if (!isFiring && heavyCurrentClip >= 1 && !player.isDead)
             {
                 StartCoroutine(FirePistol());
             }
@@ -490,7 +315,7 @@ public class WeaponManager : NetworkBehaviour
                 if (targetHit == "No Target")
                 {
                     Debug.Log("We have shot nothing.");
-                    TrailRenderer trail = Instantiate(pistolBulletTrail, heavyBulletSpawnPoint.position, quatID);
+                    TrailRenderer trail = Instantiate(heavyBulletTrail, heavyBulletSpawnPoint.position, quatID);
                     StartCoroutine(SpawnHeavyBulletTrail(trail, shootingCam.transform.forward * 100f, Vector3.zero, false));
                 }
 
@@ -523,7 +348,7 @@ public class WeaponManager : NetworkBehaviour
         while (remainingDistance > 0)
         {
             Trail.transform.position = Vector3.Lerp(startPosition, _hitPoint, 1 - (remainingDistance / distance));
-            remainingDistance -= pistolBulletSpeed * Time.deltaTime;
+            remainingDistance -= heavyBulletSpeed * Time.deltaTime;
 
             yield return null;
         }

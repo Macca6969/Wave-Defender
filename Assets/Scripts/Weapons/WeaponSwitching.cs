@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
+
 
 public class WeaponSwitching : MonoBehaviour
 {
@@ -10,7 +12,7 @@ public class WeaponSwitching : MonoBehaviour
     private  int selectedWeapon2;
 
     
-    private void Start()
+    public void Start()
      {
         selectedWeapon2 = 0;
         playerController.CmdSelectedWeapon(selectedWeapon2);

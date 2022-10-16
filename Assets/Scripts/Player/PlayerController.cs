@@ -204,7 +204,7 @@ public class PlayerController : NetworkBehaviour
     {
         if (selectedWeapon == 0)
         {
-            weaponManager.PistolReload();
+            weaponManager.pistol.PistolReload();
         }
 
         if (selectedWeapon == 1)
@@ -228,6 +228,8 @@ public class PlayerController : NetworkBehaviour
     public void SelectWeapon(int weaponOld, int weaponNew)
     {
 
+        if (isLocalPlayer)
+        {
         if (selectedWeapon == 0)
         {
             weaponPistol.SetActive(true);
@@ -253,6 +255,7 @@ public class PlayerController : NetworkBehaviour
             weaponHeavy.SetActive(true);
             audioScript.heavySelect.Play();
             manageUI.UpdateAmmoUI();
+        }
         }
         
     }

@@ -11,9 +11,9 @@ public class Enemy : NetworkBehaviour
 
 
 
-   public void EnemyUpdateHealth()
+   void EnemyUpdateHealth(int oldValue, int newValue)
    {
-       
+       Debug.Log("Enemy Health is " + enemyHealth);
    }
 
    public void TakeDamage(int damageAmount)
