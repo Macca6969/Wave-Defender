@@ -31,4 +31,7 @@ public class AudioScript : NetworkBehaviour
   [SerializeField] public AudioSource heavyEmpty;
   [SerializeField] public AudioSource heavySelect;
 
+  [Header("Enemy")]
+  [SerializeField] public AudioSource enemyDie;
+
 }
