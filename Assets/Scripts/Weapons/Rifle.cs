@@ -99,15 +99,15 @@ public class Rifle : NetworkBehaviour
                 {
                     if (objectHit.TryGetComponent<Enemy>(out Enemy enemyComponent))
                     {
-                        enemyComponent.TakeDamage(rifleDamage, playerName);
+                        enemyComponent.CmdTakeDamage(rifleDamage, playerName);
                     }
                     
                   
                 }
 
-                //muzzleFlash.SetActive(true);
+                rifleMuzzleFlash.SetActive(true);
                 yield return new WaitForSeconds(0.05f);
-                //muzzleFlash.SetActive(false);
+                rifleMuzzleFlash.SetActive(false);
                 //animator.Play("Idlerifle");
                 rifleCurrentClip = rifleCurrentClip - 1;
                 weaponManager.manageUI.UpdateAmmoUI();

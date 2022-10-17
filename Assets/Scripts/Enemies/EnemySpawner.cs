@@ -8,44 +8,41 @@ public class EnemySpawner : NetworkBehaviour
 
     public Transform spawnPos;
     public GameObject enemy;
-    public bool hasSpawned = false;
     public int enemyCount;
-    private float x;
-    private float z;
-    Vector3 spawnPosRandom = new Vector3(0.1f, 0.1f, 0.1f);
+    private bool isSpawning = false;
 
-private void Update() 
-{
-    if (isServer && enemyCount <= 5)
+    Vector3 spawnPosRandom;
+
+
+    public override void OnStartServer()
     {
-    SpawnEnemy();
+        RespawnEnemies();
     }
-}
 
+    public void RespawnEnemies()
+    {
 
-void SpawnEnemy()
-{
+        StartCoroutine(SpawnEnemy());
 
-       spawnPos.position += new Vector3(Random.Range(-10, 10),
-                           Random.Range(-0, 0),
-                           Random.Range(-10, 10)
-                           );
-   
-        GameObject enemySpawning = Instantiate(enemy, spawnPos.position, Quaternion.identity);
-        Debug.Log("Spawning enemy.");
-        NetworkServer.Spawn(enemySpawning);
-        enemyCount++;
-     
-    
-}
+    }
 
+    IEnumerator SpawnEnemy()
+    {
 
-
-public void EnemyResetBool()
-{
-    hasSpawned = false;
-}
-
-
-
+        if (!isSpawning)
+        {
+            if (isServer && enemyCount <= 5)
+            {
+                isSpawning = true;
+                yield return new WaitForSeconds(1f);
+                Vector3 spawnPosRandom = spawnPos.position + new Vector3(Random.Range(-30, 30), 0, Random.Range(-30, 30));
+                GameObject enemySpawning = Instantiate(enemy, spawnPosRandom, Quaternion.identity);
+                Debug.Log("Spawning enemy.");
+                NetworkServer.Spawn(enemySpawning);
+                enemyCount++;
+                isSpawning = false;
+                StartCoroutine(SpawnEnemy());
+            }
+        }
+    }
 }

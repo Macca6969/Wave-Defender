@@ -99,7 +99,7 @@ public class Pistol : NetworkBehaviour
                 {
                     if (objectHit.TryGetComponent<Enemy>(out Enemy enemyComponent))
                     {
-                        enemyComponent.TakeDamage(pistolDamage, playerName);
+                        enemyComponent.CmdTakeDamage(pistolDamage, playerName);
                     }
                     
                   

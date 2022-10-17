@@ -173,8 +173,8 @@ GameObject:
   - component: {fileID: 4836396627149619479}
   - component: {fileID: 4836396627149619480}
   - component: {fileID: 4836396627149619481}
+  - component: {fileID: 7171058092294027569}
   - component: {fileID: 4836396627149619475}
-  - component: {fileID: 4836396627149619476}
   - component: {fileID: 1972574397787311775}
   - component: {fileID: 3563654756739535753}
   m_Layer: 0
@@ -271,24 +271,7 @@ MonoBehaviour:
   closestPlayer: {fileID: 0}
   target: {fileID: 0}
   agent: {fileID: 4836396627149619479}
---- !u!114 &4836396627149619475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4836396627149619482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  serverOnly: 0
-  visible: 0
-  m_AssetId: a2cc8e015a11748448d6e98de1684063
-  hasSpawned: 0
---- !u!114 &4836396627149619476
+--- !u!114 &7171058092294027569
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -321,10 +304,27 @@ MonoBehaviour:
   scaleSensitivity: 0.01
   syncPosition: 1
   syncRotation: 1
-  syncScale: 1
+  syncScale: 0
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!114 &4836396627149619475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4836396627149619482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  visible: 0
+  m_AssetId: a2cc8e015a11748448d6e98de1684063
+  hasSpawned: 0
 --- !u!114 &1972574397787311775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,7 +342,8 @@ MonoBehaviour:
   setEnemyHealth: 100
   setEnemyXp: 100
   enemyHealth: 100
-  audioScript: {fileID: 0}
+  audioScript: {fileID: 3563654756739535753}
+  damageTextPrefab: {fileID: 7734241433515627314, guid: 2670615e9f02aed4fa1155cbbd614143, type: 3}
 --- !u!114 &3563654756739535753
 MonoBehaviour:
   m_ObjectHideFlags: 0

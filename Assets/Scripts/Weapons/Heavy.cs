@@ -100,7 +100,7 @@ public class Heavy : NetworkBehaviour
                 {
                     if (objectHit.TryGetComponent<Enemy>(out Enemy enemyComponent))
                     {
-                        enemyComponent.TakeDamage(heavyDamage, playerName);
+                        enemyComponent.CmdTakeDamage(heavyDamage, playerName);
                     }
 
 
