@@ -27,18 +27,8 @@ public class ManageUI : MonoBehaviour
 
     public void SetupPlayerUI()
     {
-
-        StartCoroutine(SetupUI());
-
-        IEnumerator SetupUI()
-        {
-
-            yield return new WaitForSeconds(0.0f);
-
             UpdateAmmoUI();
             UpdateHealthUI();
-
-        }
     }
 
     public void UpdateHealthUI()
@@ -89,5 +79,4 @@ public class ManageUI : MonoBehaviour
             ammoTextUI.GetComponent<TMP_Text>().text = weaponManager.heavy.heavyCurrentClip + "/" + weaponManager.heavy.heavyCurrentAmmo;
         }
     }
-
 }

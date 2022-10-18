@@ -8,25 +8,34 @@ using Mirror;
 [RequireComponent(typeof(Player))]
 public class PlayerSetupScript : NetworkBehaviour
 {
-
-
-
+    [Header("Scripts")]
+    public ManageUI setupUI;
+    public PlayerLook playerLook;
+    public PlayerController playerController;
     public InputController inputController;
     public PlayerInput playerInput;
-    public PlayerController playerController;
-    public PlayerLook playerLook;
+    public WeaponSwitching weaponSwitching;
+    public Player playerScript;
+    public AudioScript audioScript;
+    public LevelScript levelScript;
+    public PlayerHealth playerHealth;
+    public Heavy heavy;
+    public Rifle rifle;
+    public Pistol pistol;
+    public WeaponManager weaponManager;
+
+    [Header("Objects")]
     public Camera cam;
     public Camera wepCam;
     public Camera shootingCam;
     public GameObject playerUI;
-    public Player playerScript;
-    public ManageUI setupUI;
-    public WeaponSwitching weaponSwitching;
     public Rigidbody rb;
     public CharacterController characterController;
     public GameObject rightHand;
     public GameObject player;
     public GameObject playerItems;
+
+
 
 
     private void Start()
@@ -56,12 +65,21 @@ public class PlayerSetupScript : NetworkBehaviour
         playerController.enabled = true;
         playerLook.enabled = true;
         weaponSwitching.enabled = true;
+        audioScript.enabled = true;
+        levelScript.enabled = true;
+        playerHealth.enabled = true;
+        setupUI.enabled = true;
+        heavy.enabled = true;
+        rifle.enabled = true;
+        pistol.enabled = true;
+        weaponManager.enabled = true;
 
         cam.gameObject.SetActive(true);
         cam.tag = "LocalPlayer";
 
         wepCam.gameObject.SetActive(true);
         shootingCam.gameObject.SetActive(true);
+        
         playerUI.gameObject.SetActive(true);
         setupUI.SetupPlayerUI();
 

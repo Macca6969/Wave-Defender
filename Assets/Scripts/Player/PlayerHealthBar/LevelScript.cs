@@ -29,7 +29,6 @@ public class LevelScript : NetworkBehaviour
 
 
 
-    // Start is called before the first frame update
     void Start()
     {
         frontXpBar.fillAmount = player.playerCurrentXp / player.playerRequiredXp;
@@ -38,7 +37,6 @@ public class LevelScript : NetworkBehaviour
         levelText.text = player.playerCurrentLevel.ToString();
     }
 
-    // Update is called once per frame
     void Update()
     {
         UpdateXpUI();
@@ -46,18 +44,16 @@ public class LevelScript : NetworkBehaviour
         {
             GainExperienceScalable(20, player.playerCurrentLevel);
         }
-
-
         if (player.playerCurrentXp > player.playerRequiredXp && isLocalPlayer)
         {
             LevelUp();
         }
-
     }
 
     [ClientRpc]
     public void RpcPlayerGainExperience(int enemyXp, string playerName)
     {
+
         player.playerCurrentXp += enemyXp;
         Debug.Log(gameObject.name + " has gained " + enemyXp + " xp.");
 
@@ -66,9 +62,7 @@ public class LevelScript : NetworkBehaviour
             int bonusXp = (enemyXp / 10);
             player.playerCurrentXp += bonusXp;
             Debug.Log(gameObject.name + " has recieved the bonus xp.");
-
         }
-
     }
 
     public void UpdateXpUI()
@@ -89,13 +83,6 @@ public class LevelScript : NetworkBehaviour
         }
         xpText.text = player.playerCurrentXp + "/" + player.playerRequiredXp;
     }
-
-    public void GainExperienceFlatRate(float xpGained)
-    {
-        player.playerCurrentXp += xpGained;
-        lerpTimer = 0f;
-    }
-
     public void LevelUp()
     {
         CmdLevelUp();
@@ -113,7 +100,6 @@ public class LevelScript : NetworkBehaviour
     public void CmdLevelUp()
     {
         player.playerCurrentLevel++;
-
     }
 
     private int CalculateplayerRequiredXp()

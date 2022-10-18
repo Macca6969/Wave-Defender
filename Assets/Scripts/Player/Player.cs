@@ -27,6 +27,7 @@ public class Player : NetworkBehaviour
   [SerializeField] private PlayerController playerController;
   [SerializeField] private ManageUI setupUI;
   [SerializeField] private MatchSettings matchSettings;
+  [SerializeField] public PlayerHealth playerHealth;
 
   [Header("Other")]
   [SerializeField] private bool [] wasEnabled;
@@ -35,10 +36,11 @@ public class Player : NetworkBehaviour
   [SerializeField] private bool firstSetup = true;
 
   [Header("Sync Vars")]
-  [SyncVar] public int playerMaxHealth;
+  [SyncVar] 
+  public int playerMaxHealth;
   [SyncVar] public int playerCurrentHealth;
   [SyncVar] public int playerCurrentLevel;
-  [SyncVar] public float playerCurrentXp;   //make hook var
+  [SyncVar] public float playerCurrentXp; 
   [SyncVar] public float playerRequiredXp;
 
   [SyncVar] private bool _isDead = false;
@@ -83,7 +85,6 @@ private void RpcSetupPlayerOnAllClients(string newPlayer)
   }
       SetDefaults();
   }
-  
 }
 
 public void SetDefaults ()
@@ -112,12 +113,7 @@ public void SetDefaults ()
     Debug.Log("Character controller enabled.");
     }
 
-
     meshRen.enabled = true;
-
-
-
-    
 
 }
 
@@ -171,7 +167,6 @@ private void Die()
     }
     meshRen.enabled = false;
     }
-    
     
     string playerRespawning = transform.name;
     PlayerRespawn(playerRespawning);

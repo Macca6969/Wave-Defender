@@ -3921,7 +3921,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7359737992561223247
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4569,27 +4569,27 @@ GameObject:
   - component: {fileID: 9098161790655698283}
   - component: {fileID: 9098161790655698281}
   - component: {fileID: 9098161790655698282}
-  - component: {fileID: 9098161790655698280}
-  - component: {fileID: 9157537801358787536}
   - component: {fileID: 4016400094289317220}
+  - component: {fileID: 9157537801358787536}
+  - component: {fileID: 1728477862463476053}
+  - component: {fileID: 2057672437782282869}
   - component: {fileID: 4251578049597396676}
   - component: {fileID: 2856307772835922044}
   - component: {fileID: 5301617511612309664}
   - component: {fileID: 6978906506857733367}
-  - component: {fileID: 2057672437782282869}
-  - component: {fileID: 1728477862463476053}
+  - component: {fileID: 8055186398172705719}
+  - component: {fileID: 9073281325595253203}
+  - component: {fileID: 5441220378068944583}
+  - component: {fileID: 306396828775223357}
+  - component: {fileID: 2214731938350634821}
+  - component: {fileID: 210026187490384787}
+  - component: {fileID: 3324749749790035701}
   - component: {fileID: 3408265912035395653}
   - component: {fileID: 4081437057682651112}
   - component: {fileID: 7479268054348156484}
   - component: {fileID: 6319971156363458918}
   - component: {fileID: 8913218929395313448}
-  - component: {fileID: 8055186398172705719}
-  - component: {fileID: 5441220378068944583}
-  - component: {fileID: 9073281325595253203}
-  - component: {fileID: 306396828775223357}
-  - component: {fileID: 2214731938350634821}
-  - component: {fileID: 210026187490384787}
-  - component: {fileID: 3324749749790035701}
+  - component: {fileID: 9098161790655698280}
   m_Layer: 28
   m_Name: Player
   m_TagString: Player
@@ -4700,7 +4700,7 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &9098161790655698280
+--- !u!114 &4016400094289317220
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4709,14 +4709,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 9098161790655698285}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneId: 0
-  serverOnly: 0
-  visible: 0
-  m_AssetId: 9e4aaffd2a5e7584fbd4f072371e080d
-  hasSpawned: 0
+  m_Actions: {fileID: -944628639613478452, guid: d538ce6e3f14f464f9512cd040fbe957, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: OnFoot
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 1846837832154303542}
 --- !u!114 &9157537801358787536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4748,7 +4761,7 @@ MonoBehaviour:
   heavyEmpty: {fileID: 9079118372393986718}
   heavySelect: {fileID: 4224898554739424201}
   enemyDie: {fileID: 0}
---- !u!114 &4016400094289317220
+--- !u!114 &1728477862463476053
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4757,27 +4770,69 @@ MonoBehaviour:
   m_GameObject: {fileID: 9098161790655698285}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Script: {fileID: 11500000, guid: 97ac272be319161439493b6455383405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: d538ce6e3f14f464f9512cd040fbe957, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: OnFoot
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 1846837832154303542}
+  syncMode: 0
+  syncInterval: 0.1
+  setupUI: {fileID: 6978906506857733367}
+  playerLook: {fileID: 4251578049597396676}
+  playerController: {fileID: 2856307772835922044}
+  inputController: {fileID: 5301617511612309664}
+  weaponSwitching: {fileID: 2881733844808635441}
+  playerScript: {fileID: 2057672437782282869}
+  audioScript: {fileID: 9157537801358787536}
+  levelScript: {fileID: 9073281325595253203}
+  playerHealth: {fileID: 8055186398172705719}
+  heavy: {fileID: 3324749749790035701}
+  rifle: {fileID: 210026187490384787}
+  pistol: {fileID: 2214731938350634821}
+  weaponManager: {fileID: 306396828775223357}
+  cam: {fileID: 1846837832154303542}
+  wepCam: {fileID: 221602130401836762}
+  shootingCam: {fileID: 6583161080543204150}
+  playerUI: {fileID: 7359737992561223244}
+  rb: {fileID: 9098161790655698281}
+  characterController: {fileID: 9098161790655698282}
+  rightHand: {fileID: 9098161791012660199}
+  player: {fileID: 9098161790655698285}
+  playerItems: {fileID: 7359737991255374332}
+--- !u!114 &2057672437782282869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9098161790655698285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b813356fae0abf48b4da531be2ff315, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  playerUI: {fileID: 7359737992561223244}
+  rightHand: {fileID: 9098161791012660199}
+  cam: {fileID: 1846837832154303542}
+  characterController: {fileID: 9098161790655698282}
+  meshRen: {fileID: 9098161790655698283}
+  healthBarImage: {fileID: 7359737991077765924}
+  healthTextUI: {fileID: 7359737992170381050}
+  levelTextUI: {fileID: 0}
+  audioScript: {fileID: 9157537801358787536}
+  playerController: {fileID: 2856307772835922044}
+  setupUI: {fileID: 6978906506857733367}
+  matchSettings: {fileID: 5441220378068944583}
+  playerHealth: {fileID: 0}
+  wasEnabled: 
+  disableOnDeath: []
+  firstSetup: 1
+  playerMaxHealth: 100
+  playerCurrentHealth: 0
+  playerCurrentLevel: 0
+  playerCurrentXp: 0
+  playerRequiredXp: 0
+  selectedWeapon: 0
 --- !u!114 &4251578049597396676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4872,8 +4927,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b8fe6b710e462941a0360b95b935721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
   healthBarImage: {fileID: 0}
   healthTextUI: {fileID: 0}
   ammoTextUI: {fileID: 7359737991913651144}
@@ -4882,42 +4935,53 @@ MonoBehaviour:
   player: {fileID: 2057672437782282869}
   playerController: {fileID: 2856307772835922044}
   playerHealth: {fileID: 8055186398172705719}
---- !u!114 &2057672437782282869
+--- !u!114 &8055186398172705719
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9098161790655698285}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b813356fae0abf48b4da531be2ff315, type: 3}
+  m_Script: {fileID: 11500000, guid: 05a48f01410227241ae54298a521a440, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  playerUI: {fileID: 7359737992561223244}
-  rightHand: {fileID: 9098161791012660199}
-  cam: {fileID: 1846837832154303542}
-  characterController: {fileID: 9098161790655698282}
-  meshRen: {fileID: 9098161790655698283}
-  healthBarImage: {fileID: 7359737991077765924}
-  healthTextUI: {fileID: 7359737992170381050}
-  levelTextUI: {fileID: 0}
-  audioScript: {fileID: 9157537801358787536}
-  playerController: {fileID: 2856307772835922044}
-  setupUI: {fileID: 6978906506857733367}
+  levelHealthMultiplier: 2
+  chipSpeed: 2
+  frontHealthBar: {fileID: 209259728310065488}
+  backHealthBar: {fileID: 8445296765474242258}
+  player: {fileID: 2057672437782282869}
+  healthIncrement: 0
   matchSettings: {fileID: 5441220378068944583}
-  wasEnabled: 
-  disableOnDeath: []
-  firstSetup: 1
-  playerMaxHealth: 100
-  playerCurrentHealth: 0
-  playerCurrentLevel: 0
-  playerCurrentXp: 0
-  playerRequiredXp: 0
-  selectedWeapon: 0
---- !u!114 &1728477862463476053
+  audioScript: {fileID: 9157537801358787536}
+  healthText: {fileID: 5235759646151503478}
+--- !u!114 &9073281325595253203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9098161790655698285}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a62b35cc9f1d2b34e86a83d6b42b71a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  player: {fileID: 2057672437782282869}
+  audioScript: {fileID: 9157537801358787536}
+  frontXpBar: {fileID: 5506571098339066738}
+  backXpBar: {fileID: 1104388890860395737}
+  levelText: {fileID: 6949310087732423301}
+  xpText: {fileID: 6881494749087640850}
+  additionMultiplier: 300
+  powerMultiplier: 2
+  divisionMultiplier: 7
+--- !u!114 &5441220378068944583
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4926,26 +4990,120 @@ MonoBehaviour:
   m_GameObject: {fileID: 9098161790655698285}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97ac272be319161439493b6455383405, type: 3}
+  m_Script: {fileID: 11500000, guid: d556eb42613e40245b294c474a50d211, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnTime: 3
+  setMaxHealth: 100
+--- !u!114 &306396828775223357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9098161790655698285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63c8440419b2d28439d586d8b816c980, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  inputController: {fileID: 5301617511612309664}
+  player: {fileID: 2057672437782282869}
   playerController: {fileID: 2856307772835922044}
-  playerLook: {fileID: 4251578049597396676}
+  audioScript: {fileID: 9157537801358787536}
+  manageUI: {fileID: 6978906506857733367}
+  pistol: {fileID: 2214731938350634821}
+  rifle: {fileID: 210026187490384787}
+  heavy: {fileID: 3324749749790035701}
   cam: {fileID: 1846837832154303542}
-  wepCam: {fileID: 221602130401836762}
   shootingCam: {fileID: 6583161080543204150}
-  playerUI: {fileID: 7359737992561223244}
-  playerScript: {fileID: 2057672437782282869}
-  setupUI: {fileID: 6978906506857733367}
-  weaponSwitching: {fileID: 2881733844808635441}
-  rb: {fileID: 9098161790655698281}
-  characterController: {fileID: 9098161790655698282}
-  rightHand: {fileID: 9098161791012660199}
-  player: {fileID: 9098161790655698285}
-  playerItems: {fileID: 7359737991255374332}
+  isFiring: 0
+--- !u!114 &2214731938350634821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9098161790655698285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e4b5b91ce3c61148b5286b03edf4879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  weaponManager: {fileID: 306396828775223357}
+  audioScript: {fileID: 9157537801358787536}
+  pistolFireRate: 0.3
+  pistolBulletSpeed: 350
+  pistolDamage: 16
+  pistolMagSize: 14
+  pistolCurrentAmmo: 98
+  pistolCurrentClip: 14
+  pistolMaxAmmo: 98
+  pistolReloadSpeed: 0.8
+  isReloadingPistol: 0
+  pistolBulletSpawnPoint: {fileID: 3287217049401836182}
+  pistolMuzzleFlash: {fileID: 4047757798600938356}
+  pistolBulletTrail: {fileID: -6951808740216008255, guid: b4bc96b0a30aca648a1f9c07851f46d9, type: 3}
+--- !u!114 &210026187490384787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9098161790655698285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e96b02dacfa92d419a90313f8e3f1d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  weaponManager: {fileID: 306396828775223357}
+  audioScript: {fileID: 9157537801358787536}
+  rifleFireRate: 0.03
+  rifleBulletSpeed: 450
+  rifleDamage: 4
+  rifleMagSize: 90
+  rifleCurrentAmmo: 720
+  rifleCurrentClip: 90
+  rifleMaxAmmo: 720
+  rifleReloadSpeed: 1.2
+  isReloadingRifle: 0
+  rifleBulletSpawnPoint: {fileID: 7979384709641037597}
+  rifleMuzzleFlash: {fileID: 1845763866525287423}
+  rifleBulletTrail: {fileID: -4461844327463083629, guid: 305ea5c00b313244fb3e211d09cef798, type: 3}
+--- !u!114 &3324749749790035701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9098161790655698285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb59eaa0128b733458da72d776fb9cbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  weaponManager: {fileID: 306396828775223357}
+  audioScript: {fileID: 9157537801358787536}
+  heavyFireRate: 5
+  heavyBulletSpeed: 100
+  heavyDamage: 120
+  heavyMagSize: 6
+  heavyCurrentAmmo: 70
+  heavyCurrentClip: 6
+  heavyMaxAmmo: 70
+  heavyReloadSpeed: 2.8
+  isReloadingHeavy: 0
+  needReloadHeavy: 0
+  heavyBulletSpawnPoint: {fileID: 7418351826526086012}
+  heavyBulletTrail: {fileID: -130222676552222968, guid: 012351e59308ced489bb4e25563de594, type: 3}
+  heavyMuzzleFlash: {fileID: 4460110101461101371}
 --- !u!114 &3408265912035395653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5135,7 +5293,7 @@ MonoBehaviour:
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   target: {fileID: 2172850586619556660}
---- !u!114 &8055186398172705719
+--- !u!114 &9098161790655698280
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5144,166 +5302,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 9098161790655698285}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05a48f01410227241ae54298a521a440, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  levelHealthMultiplier: 2
-  chipSpeed: 2
-  frontHealthBar: {fileID: 209259728310065488}
-  backHealthBar: {fileID: 8445296765474242258}
-  player: {fileID: 2057672437782282869}
-  healthIncrement: 0
-  matchSettings: {fileID: 5441220378068944583}
-  audioScript: {fileID: 9157537801358787536}
-  healthText: {fileID: 5235759646151503478}
---- !u!114 &5441220378068944583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9098161790655698285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d556eb42613e40245b294c474a50d211, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  respawnTime: 3
-  setMaxHealth: 100
---- !u!114 &9073281325595253203
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9098161790655698285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a62b35cc9f1d2b34e86a83d6b42b71a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  player: {fileID: 2057672437782282869}
-  audioScript: {fileID: 9157537801358787536}
-  frontXpBar: {fileID: 5506571098339066738}
-  backXpBar: {fileID: 1104388890860395737}
-  levelText: {fileID: 6949310087732423301}
-  xpText: {fileID: 6881494749087640850}
-  additionMultiplier: 300
-  powerMultiplier: 2
-  divisionMultiplier: 7
---- !u!114 &306396828775223357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9098161790655698285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63c8440419b2d28439d586d8b816c980, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  player: {fileID: 2057672437782282869}
-  playerController: {fileID: 2856307772835922044}
-  audioScript: {fileID: 9157537801358787536}
-  manageUI: {fileID: 6978906506857733367}
-  pistol: {fileID: 2214731938350634821}
-  rifle: {fileID: 210026187490384787}
-  heavy: {fileID: 3324749749790035701}
-  cam: {fileID: 1846837832154303542}
-  shootingCam: {fileID: 6583161080543204150}
-  isFiring: 0
---- !u!114 &2214731938350634821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9098161790655698285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e4b5b91ce3c61148b5286b03edf4879, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  weaponManager: {fileID: 306396828775223357}
-  audioScript: {fileID: 9157537801358787536}
-  pistolFireRate: 0.3
-  pistolBulletSpeed: 350
-  pistolDamage: 16
-  pistolMagSize: 14
-  pistolCurrentAmmo: 98
-  pistolCurrentClip: 14
-  pistolMaxAmmo: 98
-  pistolReloadSpeed: 0.8
-  isReloadingPistol: 0
-  pistolBulletSpawnPoint: {fileID: 3287217049401836182}
-  pistolMuzzleFlash: {fileID: 4047757798600938356}
-  pistolBulletTrail: {fileID: -6951808740216008255, guid: b4bc96b0a30aca648a1f9c07851f46d9, type: 3}
---- !u!114 &210026187490384787
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9098161790655698285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e96b02dacfa92d419a90313f8e3f1d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  weaponManager: {fileID: 306396828775223357}
-  audioScript: {fileID: 9157537801358787536}
-  rifleFireRate: 0.03
-  rifleBulletSpeed: 450
-  rifleDamage: 4
-  rifleMagSize: 90
-  rifleCurrentAmmo: 720
-  rifleCurrentClip: 90
-  rifleMaxAmmo: 720
-  rifleReloadSpeed: 1.2
-  isReloadingRifle: 0
-  rifleBulletSpawnPoint: {fileID: 7979384709641037597}
-  rifleMuzzleFlash: {fileID: 1845763866525287423}
-  rifleBulletTrail: {fileID: -4461844327463083629, guid: 305ea5c00b313244fb3e211d09cef798, type: 3}
---- !u!114 &3324749749790035701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9098161790655698285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb59eaa0128b733458da72d776fb9cbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  weaponManager: {fileID: 306396828775223357}
-  audioScript: {fileID: 9157537801358787536}
-  heavyFireRate: 5
-  heavyBulletSpeed: 100
-  heavyDamage: 120
-  heavyMagSize: 6
-  heavyCurrentAmmo: 70
-  heavyCurrentClip: 6
-  heavyMaxAmmo: 70
-  heavyReloadSpeed: 2.8
-  isReloadingHeavy: 0
-  needReloadHeavy: 0
-  heavyBulletSpawnPoint: {fileID: 7418351826526086012}
-  heavyBulletTrail: {fileID: -130222676552222968, guid: 012351e59308ced489bb4e25563de594, type: 3}
-  heavyMuzzleFlash: {fileID: 4460110101461101371}
+  sceneId: 0
+  serverOnly: 0
+  visible: 0
+  m_AssetId: 9e4aaffd2a5e7584fbd4f072371e080d
+  hasSpawned: 0
 --- !u!1 &9098161791012660199
 GameObject:
   m_ObjectHideFlags: 0
