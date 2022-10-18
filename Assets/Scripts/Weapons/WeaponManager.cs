@@ -51,7 +51,20 @@ public class WeaponManager : NetworkBehaviour
 
     }
 
+    [ClientRpc]
+    public void RpcRotateDamageText(GameObject damageTextSpawn)
+    {
+        if (isLocalPlayer)
+        {
+            damageTextSpawn.transform.LookAt(transform);
+            Debug.Log("Rotating text to player.");
+            //get the damage text spawn gameobject, and rotate it to current player
+        }
 }
+
+}
+
+
 
 
 

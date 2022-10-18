@@ -5235,13 +5235,13 @@ MonoBehaviour:
   syncInterval: 0.1
   weaponManager: {fileID: 306396828775223357}
   audioScript: {fileID: 9157537801358787536}
-  pistolFireRate: 0.4
-  pistolBulletSpeed: 300
+  pistolFireRate: 0.3
+  pistolBulletSpeed: 350
   pistolDamage: 16
-  pistolMagSize: 7
-  pistolCurrentAmmo: 45
-  pistolCurrentClip: 7
-  pistolMaxAmmo: 50
+  pistolMagSize: 14
+  pistolCurrentAmmo: 98
+  pistolCurrentClip: 14
+  pistolMaxAmmo: 98
   pistolReloadSpeed: 0.8
   isReloadingPistol: 0
   pistolBulletSpawnPoint: {fileID: 3287217049401836182}
@@ -5263,8 +5263,8 @@ MonoBehaviour:
   syncInterval: 0.1
   weaponManager: {fileID: 306396828775223357}
   audioScript: {fileID: 9157537801358787536}
-  rifleFireRate: 0.02
-  rifleBulletSpeed: 350
+  rifleFireRate: 0.03
+  rifleBulletSpeed: 450
   rifleDamage: 4
   rifleMagSize: 90
   rifleCurrentAmmo: 720

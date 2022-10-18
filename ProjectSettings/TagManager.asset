@@ -9,6 +9,7 @@ TagManager:
   - PlayerHeavy
   - PistolBullet
   - Enemy
+  - LocalPlayer
   layers:
   - Default
   - TransparentFX

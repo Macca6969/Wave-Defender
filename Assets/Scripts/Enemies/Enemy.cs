@@ -18,7 +18,7 @@ public class Enemy : NetworkBehaviour
     public GameObject damageTextPrefab;
 
     public float destroyTime = 3f;
-    
+
 
 
     private void Start()
@@ -32,7 +32,7 @@ public class Enemy : NetworkBehaviour
         Debug.Log("Enemy Health is " + enemyHealth);
         ServerShowDamage();
         //RpcShowDamageText();
-       
+
     }
 
     [Command(requiresAuthority = false)]
@@ -63,15 +63,19 @@ public class Enemy : NetworkBehaviour
         }
     }
 
+
+    //Enemy spawns damage pop up
     [Server]
     public void ServerShowDamage()
     {
-            GameObject damageTextSpawn = Instantiate(damageTextPrefab, transform.position, Quaternion.identity);
-            damageTextSpawn.GetComponent<TMP_Text>().text = enemyHealth.ToString();
-            NetworkServer.Spawn(damageTextSpawn);
-             //RpcShowDamageText();
-             Debug.Log("Server Show Damage");
+        GameObject damageTextSpawn = Instantiate(damageTextPrefab, transform.position, Quaternion.identity);
+        damageTextSpawn.GetComponent<TMP_Text>().text = enemyHealth.ToString();
+        NetworkServer.Spawn(damageTextSpawn);
     }
+ 
+
+
+
 
 
 

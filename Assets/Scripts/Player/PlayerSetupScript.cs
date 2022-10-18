@@ -56,7 +56,10 @@ public class PlayerSetupScript : NetworkBehaviour
         playerController.enabled = true;
         playerLook.enabled = true;
         weaponSwitching.enabled = true;
+
         cam.gameObject.SetActive(true);
+        cam.tag = "LocalPlayer";
+
         wepCam.gameObject.SetActive(true);
         shootingCam.gameObject.SetActive(true);
         playerUI.gameObject.SetActive(true);

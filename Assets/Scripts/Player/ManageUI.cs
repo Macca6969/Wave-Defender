@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Mirror;
 
 
-public class ManageUI : NetworkBehaviour
+public class ManageUI : MonoBehaviour
 {
 
     [Header("UI Components")]
@@ -36,7 +35,6 @@ public class ManageUI : NetworkBehaviour
 
             yield return new WaitForSeconds(0.0f);
 
-            playerUI.gameObject.SetActive(true);
             UpdateAmmoUI();
             UpdateHealthUI();
 

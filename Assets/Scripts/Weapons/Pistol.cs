@@ -112,7 +112,6 @@ public class Pistol : NetworkBehaviour
                 pistolCurrentClip = pistolCurrentClip - 1;
                 weaponManager.manageUI.UpdateAmmoUI();
                 yield return new WaitForSeconds(pistolFireRate);
-                weaponManager.isFiring = false;
 
                 FiringPistol(weaponManager.playerController.playerShooting);
             }
